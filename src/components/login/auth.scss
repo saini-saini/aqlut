@@ -1,0 +1,256 @@
+.welcomeForm {
+    background-image: url("../../images/AuthBgImg.png");
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        width: 375px;
+        height: 515px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        justify-content: center;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 25px;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-family: "Jost", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 40.46px;
+        text-align: left;
+
+
+    }
+
+    &__text {
+        width: 325px;
+        height: 46px;
+        // font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 23.12px;
+        text-align: center;
+        color: #575757;
+
+    }
+
+    &__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__label {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 20.23px;
+        text-align: left;
+
+    }
+
+    &__input {
+        width: 326px;
+        height: 48px;
+        gap: 0px;
+        border-radius: 8px;
+        border: 1px solid #F0F1F7;
+        outline-color: #F55A2C;
+        padding-left: 15px;
+        position: relative;
+    }
+
+    &__button {
+        width: 300px;
+        height: 56px;
+        border-radius: 8px;
+        background-color: #F55A2C;
+        color: #ffff;
+        border: none;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 23.12px;
+        cursor: pointer;
+    }
+
+    &__inputBtn{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__btnWrapper{
+        display: flex;
+        justify-content: center;
+    }
+
+   
+   &__font{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   }
+
+   &__locationIcon{
+    position: absolute;
+    right: 35px;
+    bottom: 96px;
+
+   }
+        
+}
+
+
+
+.loginForm {
+    background-image: url("../../images/AuthBgImg.png");
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__content {
+        width: 375px;
+        height: 515px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        position: relative;
+        right: 115px;
+    }
+
+    &__wrapper {
+        position: absolute;
+        top: 47px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 25px;
+    }
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        // font-family: Jost;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 40.46px;
+        text-align: left;
+
+
+    }
+
+    &__text {
+        width: 325px;
+        height: 46px;
+        // font-family: Jost;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 23.12px;
+        text-align: center;
+        color: #575757;
+
+    }
+
+    &__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__label {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 20.23px;
+        text-align: left;
+
+    }
+
+    &__input {
+        width: 326px;
+        height: 48px;
+        gap: 0px;
+        border-radius: 8px;
+        border: 1px solid #F0F1F7;
+        outline-color: #F55A2C;
+        padding-left: 15px;
+        position: relative;
+    }
+
+    &__button {
+        width: 300px;
+        height: 56px;
+        border-radius: 8px;
+        background-color: #F55A2C;
+        color: #ffff;
+        border: none;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 500;
+        line-height: 23.12px;
+        cursor: pointer;
+    }
+
+    &__inputBtn{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__btnWrapper{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+
+    }
+
+   
+   &__font{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   }
+
+   &__locationIcon{
+    position: absolute;
+    right: 35px;
+    bottom: 96px;
+
+   }
+
+   &__contactUsText{
+    font-weight: 500;
+
+   }
+
+   &__forgotTxt{
+    font-weight: 500;
+    font-size: 14px;
+    text-align: right;
+    cursor: pointer;
+   }
+        
+}

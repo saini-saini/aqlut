@@ -1,0 +1,299 @@
+.QRMenuGroup {
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../images//Background\ Image.png");
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(215, 215, 215, 0.32);
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    &__topWrapper {
+        display: flex;
+        justify-content: space-between;
+        // padding: 33px 62px 19px 35px;
+        align-items: center;
+        padding: 33px 56px 0px 53px;
+    }
+
+    &__title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+        font-family: "Montserrat", sans-serif;
+        color: #000000;
+        width: 211px;
+        height: 29px;
+
+    }
+
+    &__createButton {
+        width: 179px;
+        height: 42px;
+        border-radius: 10px;
+        border: none;
+        background-color: #F55A2C;
+        color: white;
+        text-transform: uppercase;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        cursor: pointer;
+        box-shadow: 0px 2px 16px 0px #3D6BC040;
+    }
+
+    &__bottomWrapper {
+        padding: 19px 56px 0px 53px;
+    }
+
+}
+
+
+
+.ant-table-thead>tr>th {
+    height: 42px !important;
+    background-color: #F55A2C !important;
+    color: white !important;
+    font-family: "Montserrat";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 17.07px;
+    text-align: left;
+}
+
+.ant-table-tbody>tr>td {
+    color: #000000 !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.07px;
+    text-align: left;
+    // background-color: lightgray;
+}
+
+.ant-pagination-item-active {
+    border:2px solid #F0F1F7 !important;
+}
+
+.css-dev-only-do-not-override-1kuana8 .ant-pagination .ant-pagination-item-active a {
+    color: #000000 !important;
+    font-family: "Montserrat";
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17.07px;
+    text-align: left;
+}
+
+
+.QRMenuGroup .ant-table-thead > tr > th:nth-child(1),
+.QRMenuGroup .ant-table-tbody > tr > td:nth-child(1) {
+  border-radius: 8px 0 0 8px;
+  border-top: 1px solid #F0F1F7;
+  border-bottom: 1px solid #F0F1F7;
+  border-left: 1px solid #F0F1F7;
+  margin-bottom: 19px !important;
+
+
+}
+
+.QRMenuGroup .ant-table-thead > tr > th:nth-child(3),
+.QRMenuGroup .ant-table-tbody > tr > td:nth-child(3) {
+  border-top: 1px solid #F0F1F7;
+  border-bottom: 1px solid #F0F1F7;
+  border-right: 1px solid #F0F1F7;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 19px !important;
+
+
+}
+
+.QRMenuGroup .ant-table-thead > tr > th:nth-child(2),
+.QRMenuGroup .ant-table-tbody > tr > td:nth-child(2) {
+  border-top: 1px solid #F0F1F7;
+  border-bottom: 1px solid #F0F1F7;
+  margin-bottom: 19px !important;
+}
+
+
+.createItem {
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../images//Background\ Image.png");
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(215, 215, 215, 0.32);
+    padding: 44px 47px 0px 57px;
+    gap: 15px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    &__topWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+        font-family: "Montserrat", sans-serif;
+        color: #000000;
+        width: 208px;
+        height: 29px;
+
+    }
+
+    &__image {
+        width: 135px;
+        height: 114px;
+        border-radius: 20px;
+        box-shadow: 0px 2px 8px 0px #00000040;
+        background: #FFFFFF;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    &__bottomWrapper {
+        width: 100%;
+        // height: 100%;
+        background-color: white;
+        box-shadow: 0px 2px 8px 0px #00000047;
+        border-radius: 10px;
+        padding: 43px 70px 0px 54px;
+        // overflow-y: scroll;
+        // &::-webkit-scrollbar {
+        //     display: none;
+        // }
+    }
+
+    &__removeBtn {
+        width: 195px;
+        height: 42px;
+        border-radius: 10px;
+        color: white;
+        background-color: #F55A2C;
+        text-transform: uppercase;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0px 2px 16px 0px #3D6BC040;
+
+    }
+
+    &__label{
+        font-family: "Montserrat";
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14.63px;
+        text-align: left;
+        
+    }
+
+    &__btnWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+
+    &__input {
+        width: 437px;
+        height: 42px;
+        border: 1px solid #E1E1E1;
+        outline-color: #F55A2C;
+        padding-left: 6px;
+        border-radius: 8px;
+    }
+
+    select {
+        width: 437px;
+        height: 42px;
+        border: 1px solid #E1E1E1;
+        outline-color: #F55A2C;
+        padding-left: 6px;
+        border-radius: 8px;
+    }
+
+    &__formLeft {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__formRight {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+
+    &__priceiInput {
+        width: 123px;
+        height: 39px;
+        border: 0.93px solid #F0F1F7;
+        outline-color: #F55A2C;
+        padding-left: 6px;
+        border-radius: 7px;
+        background: #FCFDFE;
+    }
+
+    &__priceLabel {
+        font-family: "Montserrat";
+        font-size: 11.15px;
+        font-weight: 400;
+        line-height: 13.59px;
+        text-align: left;
+        color: #000000;
+    }
+
+    &__updateBtn {
+        width: 185px;
+        height: 42px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 16px 0px #3D6BC040;
+        background-color: #000000;
+        color: white;
+        text-transform: uppercase;
+        cursor: pointer;
+
+    }
+
+    &__update {
+        display: flex;
+        justify-content: center;
+        padding: 31px 0px;
+    }
+
+}
+
+
+:where(.css-dev-only-do-not-override-1kuana8).ant-input-outlined:focus-within {
+    border-color: white !important;
+    box-shadow: 0px 2px 8px 0px #F55A2C !important;
+    
+    }
+    
+    :where(.css-dev-only-do-not-override-1kuana8).ant-input-outlined:hover {
+        border-color: white !important;    
+        }
