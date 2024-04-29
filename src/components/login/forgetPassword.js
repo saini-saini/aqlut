@@ -1,6 +1,6 @@
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react';
 import close from "../../images/close (1).png"
+import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 
 const ForgetPassword = ({ open, setOpen, onClose }) => {
     const [email, setEmail] = useState('');
@@ -15,7 +15,6 @@ const ForgetPassword = ({ open, setOpen, onClose }) => {
             email: email
         });
     };
-
 
     return (
         <div>
@@ -41,8 +40,8 @@ const ForgetPassword = ({ open, setOpen, onClose }) => {
                         </label>
                     </Flex>
 
-                    <Dialog.Close style={{ width: "48px", height: "48px",backgroundColor:'black' }}>
-                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer",padding:"10px", borderRadius:"50%"}} />
+                    <Dialog.Close style={{ width: "48px", height: "48px", backgroundColor: 'black' }}>
+                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer", padding: "10px", borderRadius: "50%" }} />
                     </Dialog.Close>
 
                     <Flex justify="center">

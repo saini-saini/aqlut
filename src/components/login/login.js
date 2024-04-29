@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
 import "./auth.scss"
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-// import RoomIcon from '@mui/icons-material/Room';
-import TextError from '../../formValidation/error';
-import { LoginValidation } from '../../formValidation/formValidation';
 import ForgetPassword from './forgetPassword';
+import React, { useState } from 'react'
+import TextError from '../../formValidation/error';
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { LoginValidation } from '../../formValidation/formValidation';
 
 const Login = () => {
     const [forgetPasswordOpen, setForgetPasswordOpen] = useState(false);
@@ -49,7 +48,7 @@ const Login = () => {
                     </div>
                 </Form>
             </Formik>
-            {forgetPasswordOpen && <ForgetPassword open={forgetPasswordOpen} setOpen={setForgetPasswordOpen}  onClose={closeForgetPasswordDialog} />}
+            {forgetPasswordOpen && <ForgetPassword open={forgetPasswordOpen} setOpen={setForgetPasswordOpen} onClose={closeForgetPasswordDialog} />}
         </div>
     )
 }

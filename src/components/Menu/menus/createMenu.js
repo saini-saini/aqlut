@@ -1,8 +1,8 @@
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
-import React, { useState } from 'react';
-import close from "../../../images/close (1).png"
 import Avatar from '@mui/material/Avatar';
+import close from "../../../images/close (1).png"
 import img from "../../../images/createMenuImg.png"
+import React, { useState } from 'react';
+import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 const CreateMenu = ({ open, setOpen, onClose }) => {
 
     const [name, setName] = useState("");

@@ -1,72 +1,72 @@
-import React, { useState } from 'react'
 import "./sectionItem.scss"
-import { Input, Table, Select } from 'antd';
 import Avatar from '@mui/material/Avatar';
-import { FormControlLabel, Switch, styled } from '@mui/material'
+import BrushIcon from '@mui/icons-material/Brush';
 import exportIcon from "../../../images/export.png"
-import { message, Upload } from 'antd';
 import filterIcon from "../../../images/filter.png"
 import filter from "../../../images/filter (1).png"
-import searchIcon from "../../../images/search (3).png"
-import { useNavigate } from 'react-router-dom';
-import { Drawer } from 'antd';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import BrushIcon from '@mui/icons-material/Brush';
 import DeleteIcon from '@mui/icons-material/Delete';
+import searchIcon from "../../../images/search (3).png"
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Drawer } from 'antd';
+import { message, Upload } from 'antd';
+import React, { useState } from 'react'
+import { Input, Table, Select } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { FormControlLabel, Switch, styled } from '@mui/material'
 
-const SectionItems = () => {
-
-  const IOSSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-  ))(({ theme }) => ({
-    width: 45,
-    height: 20,
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 45,
+  height: 20,
+  padding: 0,
+  margin: 0,
+  '& .MuiSwitch-switchBase': {
     padding: 0,
-    margin: 0,
-    '& .MuiSwitch-switchBase': {
-      padding: 0,
-      margin: 2.4,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(25px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
-          opacity: 1,
-          border: 0,
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-          opacity: 0.5,
-        },
-      },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#33cf4d',
-        border: '6px solid #fff',
-      },
-      '&.Mui-disabled .MuiSwitch-thumb': {
-        color:
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[600],
+    margin: 2.4,
+    transitionDuration: '300ms',
+    '&.Mui-checked': {
+      transform: 'translateX(25px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+        opacity: 1,
+        border: 0,
       },
       '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+        opacity: 0.5,
       },
     },
-    '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
-      width: 15,
-      height: 15,
+    '&.Mui-focusVisible .MuiSwitch-thumb': {
+      color: '#33cf4d',
+      border: '6px solid #fff',
     },
-    '& .MuiSwitch-track': {
-      borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-      opacity: 1,
-      transition: theme.transitions.create(['background-color'], {
-        duration: 500,
-      }),
+    '&.Mui-disabled .MuiSwitch-thumb': {
+      color:
+        theme.palette.mode === 'light'
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
     },
-  }));
+    '&.Mui-disabled + .MuiSwitch-track': {
+      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxSizing: 'border-box',
+    width: 15,
+    height: 15,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    opacity: 1,
+    transition: theme.transitions.create(['background-color'], {
+      duration: 500,
+    }),
+  },
+}));
+
+const SectionItems = () => {
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -281,61 +281,105 @@ const SectionItems = () => {
         key={placement}
       // style={{ width: "398px" }}
       >
-<div style={{display:'flex', flexDirection:"column", gap:"34px"}}>
+        <div style={{ display: 'flex', flexDirection: "column", gap: "34px" }}>
 
-        <div style={{display:"flex", flexDirection:"column", gap:"22px"}}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-          <p style={{
-            margin: "0px",
-            fontFamily: "Montserrat",
-            fontSize: "13px",
-            fontWeight: '600',
-            lineHeight: "20px",
-            textAlign: "left",
+          <div style={{ display: "flex", flexDirection: "column", gap: "22px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+              <p style={{
+                margin: "0px",
+                fontFamily: "Montserrat",
+                fontSize: "13px",
+                fontWeight: '600',
+                lineHeight: "20px",
+                textAlign: "left",
 
-          }}>Mark Section as New</p>
-          <FormControlLabel
-            sx={{ marginRight: "7px" }}
-            control={<IOSSwitch defaultChecked />}
-            className='sectionItem__switch'
-          />
+              }}>Mark Section as New</p>
+              <FormControlLabel
+                sx={{ marginRight: "7px" }}
+                control={<IOSSwitch defaultChecked />}
+                className='sectionItem__switch'
+              />
 
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-          <p style={{
-            margin: "0px",
-            fontFamily: "Montserrat",
-            fontSize: "13px",
-            fontWeight: '600',
-            lineHeight: "20px",
-            textAlign: "left",
-
-          }}>Mark Section as Signature</p>
-          <FormControlLabel
-            sx={{ marginRight: "7px" }}
-            control={<IOSSwitch defaultChecked />}
-            className='profile__switch'
-          />
-        </div>
-
-        <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
-          <label >Price</label>
-          <div style={{ display: "flex", gap: "13px" }}>
-            <div>
-              <Input placeholder="price" style={{
-                width: "177px",
-                height: "44px",
-                borderRadius: "8px",
-
-              }} />
             </div>
 
-            <div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+              <p style={{
+                margin: "0px",
+                fontFamily: "Montserrat",
+                fontSize: "13px",
+                fontWeight: '600',
+                lineHeight: "20px",
+                textAlign: "left",
+
+              }}>Mark Section as Signature</p>
+              <FormControlLabel
+                sx={{ marginRight: "7px" }}
+                control={<IOSSwitch defaultChecked />}
+                className='profile__switch'
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
+              <label >Price</label>
+              <div style={{ display: "flex", gap: "13px" }}>
+                <div>
+                  <Input placeholder="price" style={{
+                    width: "177px",
+                    height: "44px",
+                    borderRadius: "8px",
+
+                  }} />
+                </div>
+
+                <div>
+                  <Select
+                    defaultValue="lucy"
+                    style={{
+                      width: 155,
+                      height: 44,
+                      borderRadius: "8px",
+                    }}
+                    onChange={handleChange}
+                    options={[
+                      {
+                        value: 'jack',
+                        label: 'Jack',
+                      },
+                      {
+                        value: 'lucy',
+                        label: 'Lucy',
+                      },
+                      {
+                        value: 'Yiminghe',
+                        label: 'yiminghe',
+                      },
+                      {
+                        value: 'disabled',
+                        label: 'Disabled',
+                        disabled: true,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
+              <p style={{
+                margin: "0px",
+                fontFamily: "Montserrat",
+                fontSize: "13px",
+                fontWeight: "500",
+                lineHeight: "20px",
+                textAlign: "left",
+
+
+              }}>Recommended Items</p>
+
               <Select
                 defaultValue="lucy"
                 style={{
-                  width: 155,
+                  width: 345,
                   height: 44,
                   borderRadius: "8px",
                 }}
@@ -347,7 +391,7 @@ const SectionItems = () => {
                   },
                   {
                     value: 'lucy',
-                    label: 'Lucy',
+                    label: 'Don’t have recommended items',
                   },
                   {
                     value: 'Yiminghe',
@@ -360,104 +404,25 @@ const SectionItems = () => {
                   },
                 ]}
               />
+
             </div>
-          </div>
-        </div>
 
-        <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
-          <p style={{
-            margin: "0px",
-            fontFamily: "Montserrat",
-            fontSize: "13px",
-            fontWeight: "500",
-            lineHeight: "20px",
-            textAlign: "left",
+            <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
+              <p style={{
+                margin: "0px",
+                fontFamily: "Montserrat",
+                fontSize: "13px",
+                fontWeight: "500",
+                lineHeight: "20px",
+                textAlign: "left",
 
 
-          }}>Recommended Items</p>
+              }}>Allergies</p>
 
-          <Select
-            defaultValue="lucy"
-            style={{
-              width: 345,
-              height: 44,
-              borderRadius: "8px",
-            }}
-            onChange={handleChange}
-            options={[
-              {
-                value: 'jack',
-                label: 'Jack',
-              },
-              {
-                value: 'lucy',
-                label: 'Don’t have recommended items',
-              },
-              {
-                value: 'Yiminghe',
-                label: 'yiminghe',
-              },
-              {
-                value: 'disabled',
-                label: 'Disabled',
-                disabled: true,
-              },
-            ]}
-          />
-
-        </div>
-
-        <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
-          <p style={{
-            margin: "0px",
-            fontFamily: "Montserrat",
-            fontSize: "13px",
-            fontWeight: "500",
-            lineHeight: "20px",
-            textAlign: "left",
-
-
-          }}>Allergies</p>
-
-          <Select
-            defaultValue="lucy"
-            style={{
-              width: 345,
-              height: 44,
-              borderRadius: "8px",
-            }}
-            onChange={handleChange}
-            options={[
-              {
-                value: 'jack',
-                label: 'Jack',
-              },
-              {
-                value: 'lucy',
-                label: 'Don’t have allergies',
-              },
-              {
-                value: 'Yiminghe',
-                label: 'yiminghe',
-              },
-              {
-                value: 'disabled',
-                label: 'Disabled',
-                disabled: true,
-              },
-            ]}
-          />
-
-        </div>
-
-        <div style={{ display: 'flex', gap: "13px" }}>
-          <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
-            <label>Section</label>
-            <div>
               <Select
                 defaultValue="lucy"
                 style={{
-                  width: 165,
+                  width: 345,
                   height: 44,
                   borderRadius: "8px",
                 }}
@@ -469,7 +434,7 @@ const SectionItems = () => {
                   },
                   {
                     value: 'lucy',
-                    label: 'Lucy',
+                    label: 'Don’t have allergies',
                   },
                   {
                     value: 'Yiminghe',
@@ -482,55 +447,90 @@ const SectionItems = () => {
                   },
                 ]}
               />
+
+            </div>
+
+            <div style={{ display: 'flex', gap: "13px" }}>
+              <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
+                <label>Section</label>
+                <div>
+                  <Select
+                    defaultValue="lucy"
+                    style={{
+                      width: 165,
+                      height: 44,
+                      borderRadius: "8px",
+                    }}
+                    onChange={handleChange}
+                    options={[
+                      {
+                        value: 'jack',
+                        label: 'Jack',
+                      },
+                      {
+                        value: 'lucy',
+                        label: 'Lucy',
+                      },
+                      {
+                        value: 'Yiminghe',
+                        label: 'yiminghe',
+                      },
+                      {
+                        value: 'disabled',
+                        label: 'Disabled',
+                        disabled: true,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
+                <label>Menu</label>
+                <div>
+                  <Select
+                    defaultValue="lucy"
+                    style={{
+                      width: 165,
+                      height: 44,
+                      borderRadius: "8px",
+                    }}
+                    onChange={handleChange}
+                    options={[
+                      {
+                        value: 'jack',
+                        label: 'Jack',
+                      },
+                      {
+                        value: 'lucy',
+                        label: 'Lucy',
+                      },
+                      {
+                        value: 'Yiminghe',
+                        label: 'yiminghe',
+                      },
+                      {
+                        value: 'disabled',
+                        label: 'Disabled',
+                        disabled: true,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: 'column', gap: "7px" }}>
-            <label>Menu</label>
-            <div>
-              <Select
-                defaultValue="lucy"
-                style={{
-                  width: 165,
-                  height: 44,
-                  borderRadius: "8px",
-                }}
-                onChange={handleChange}
-                options={[
-                  {
-                    value: 'jack',
-                    label: 'Jack',
-                  },
-                  {
-                    value: 'lucy',
-                    label: 'Lucy',
-                  },
-                  {
-                    value: 'Yiminghe',
-                    label: 'yiminghe',
-                  },
-                  {
-                    value: 'disabled',
-                    label: 'Disabled',
-                    disabled: true,
-                  },
-                ]}
-              />
-            </div>
+          <div style={{
+            display: "flex",
+            gap: "12px",
+            // height: "120px",
+            alignItems: "flex-end"
+          }}>
+            <button className='sectionItem__resetBtn'>Reset</button>
+            <button className='sectionItem__applyBtn'>Apply</button>
           </div>
         </div>
-        </div>
-
-        <div style={{
-          display: "flex",
-          gap: "12px",
-          // height: "120px",
-          alignItems: "flex-end"
-        }}>
-          <button className='sectionItem__resetBtn'>Reset</button>
-          <button className='sectionItem__applyBtn'>Apply</button>
-        </div>
-</div>
       </Drawer>
 
     </div>

@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { Flex } from '@radix-ui/themes';
-import { message, Upload } from 'antd';
-import img from "../../../images/createMenuImg.png"
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { Select } from 'antd';
 import "./sectionItem.scss"
 import Avatar from '@mui/material/Avatar';
+import img from "../../../images/createMenuImg.png"
+import { Select } from 'antd';
+import React, { useState } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const CreateItem = () => {
 
@@ -14,75 +12,10 @@ const CreateItem = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const filteredOptions = OPTIONS.filter((o) => !selectedItems.includes(o));
 
-
-    const getBase64 = (img, callback) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result));
-        reader.readAsDataURL(img);
-    };
-
-    const [imageUrl, setImageUrl] = useState();
-    const handleChange = (info) => {
-        if (info.file.status === 'uploading') {
-            return;
-        }
-        if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj, (url) => {
-                setImageUrl(url);
-            });
-        }
-    };
-
-    const uploadButton = (
-        <button
-            style={{
-                background: 'white',
-                width: '195px',
-                height: "42px",
-                borderRadius: '10px',
-                border: "1px solid #F55A2C",
-                boxShadow: "0px 2px 16px 0px #3D6BC040",
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-            type="button"
-        >
-            <div
-                style={{
-                    marginTop: 8,
-                }}
-            >
-                <p style={{
-                    fontFamily: "Montserrat",
-                    fontSize: "14px",
-                    fontWeight: "600",
-                    lineHeight: "17.07px",
-                    color: "#F55A2C",
-
-                }}>CHANGE PHOTO</p>
-            </div>
-
-        </button>
-    );
-
-    const beforeUpload = (file) => {
-        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-        if (!isJpgOrPng) {
-            message.error('You can only upload JPG/PNG file!');
-        }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-            message.error('Image must smaller than 2MB!');
-        }
-        return isJpgOrPng && isLt2M;
-    };
-
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
     };
-
 
     return (
         <div className='createItem'>

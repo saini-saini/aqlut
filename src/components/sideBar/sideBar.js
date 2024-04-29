@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
 import './sideBar.scss';
-import profile from "../../images/user (1).png";
 import menu from "../../images/bill.png";
+import Avatar from '@mui/material/Avatar';
 import QRCode from "../../images/qrScan.png";
 import order from "../../images/order (2).png";
-import rhombus from "../../images/rhombus (2).png";
 import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useLocation, useNavigate } from 'react-router-dom';
+import profile from "../../images/user (1).png";
+import rhombus from "../../images/rhombus (2).png";
 import activeUser from "../../images/active-user.png"
 import activeMenu from "../../images/avtive-bill.png"
-import activeRhombus from "../../images/active-rhombus.png"
 import activeQRMenu from "../../images/active-qr-scan.png"
 import activeOrder from "../../images/active-clipboard.png"
-import profileLogo from "../../images/profileSectionImg1.png"
-import Avatar from '@mui/material/Avatar';
+import activeRhombus from "../../images/active-rhombus.png"
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import profileLogo from "../../images/profileSectionImg1.png";
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const SideBar = () => {
@@ -24,14 +24,13 @@ const SideBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Function to set the active link
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
   };
 
   return (
     <nav className='sideBar' >
-      <Avatar alt="logo" src={profileLogo?profileLogo :""} sx={{ width: 90, height: 90, margin: "20px" }} />
+      <Avatar alt="logo" src={profileLogo ? profileLogo : ""} sx={{ width: 90, height: 90, margin: "20px" }} />
       <div>
         <div style={{ display: "flex", alignItems: "center" }}>
           {location.pathname === '/home' && (
@@ -56,8 +55,9 @@ const SideBar = () => {
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
                 id="panel1-header"
-                sx={{ margin: "0px", gap:"108px"
-              }}
+                sx={{
+                  margin: "0px", gap: "108px"
+                }}
               >
                 <div className='sideBar__expandHeading'>
                   {(location.pathname === '/home/menus/menus' || location.pathname === '/home/menus/sections' || location.pathname === '/home/menus/section_items') && (

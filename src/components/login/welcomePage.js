@@ -1,23 +1,23 @@
-import React from 'react'
 import "./auth.scss"
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import RoomIcon from '@mui/icons-material/Room';
-import { WelcomeValidation } from '../../formValidation/formValidation';
+import React from 'react'
 import TextError from '../../formValidation/error';
 import { useNavigate } from 'react-router-dom';
-const WelcomePage = () => {
-const navigate = useNavigate();
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { WelcomeValidation } from '../../formValidation/formValidation';
 
-const handleContinue = (values) => {
-    navigate('/login')
-    console.log(values)
-}
+const WelcomePage = () => {
+    const navigate = useNavigate();
+
+    const handleContinue = (values) => {
+        navigate('/login')
+        console.log(values)
+    }
     return (
         <div className='welcomeForm'>
             <Formik
-            initialValues={{ location: '' }}
-            onSubmit={handleContinue}
-            validationSchema={WelcomeValidation}
+                initialValues={{ location: '' }}
+                onSubmit={handleContinue}
+                validationSchema={WelcomeValidation}
             >
                 <Form className='welcomeForm__content'>
                     <div className='welcomeForm__wrapper'>

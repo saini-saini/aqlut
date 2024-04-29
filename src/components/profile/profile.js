@@ -1,30 +1,27 @@
-import React, { useState } from 'react'
 import "./profile.scss"
-import { Button, FormControlLabel, Switch, styled } from '@mui/material'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
 import shop from "../../images/shop.png"
-import email from "../../images/email.png"
-import location from "../../images/location.png"
-import clock from "../../images/clock.png"
-import phone from "../../images/telephone.png"
-import eyeglasses from "../../images/eyeglasses.png"
-import dollar from "../../images/dollar.png"
-import percentage from "../../images/percentage.png"
-import Checkbox from '@mui/material/Checkbox';
-import calender from "../../images/check-mark.png"
-import 'react-phone-number-input/style.css'
-// import PhoneInput from 'react-phone-number-input'
-import ChangePassword from './changePassword'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 import Avatar from '@mui/material/Avatar';
+import email from "../../images/email.png"
+import clock from "../../images/clock.png"
+import 'react-phone-input-2/lib/style.css';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-input-2'
+import dollar from "../../images/dollar.png"
+import ChangePassword from './changePassword'
+import Checkbox from '@mui/material/Checkbox';
+import phone from "../../images/telephone.png"
+import location from "../../images/location.png"
 import img from "../../images/createMenuImg.png"
-
-
+import calender from "../../images/check-mark.png"
+import eyeglasses from "../../images/eyeglasses.png"
+import percentage from "../../images/percentage.png"
+import React, { useState } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { FormControlLabel, Switch, styled } from '@mui/material';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -112,14 +109,14 @@ const Profile = () => {
     const file = event.target.files[0];
     setSelectedImage(file);
   };
-  
+
   const removeImage = () => {
     setSelectedImage(null);
     document.getElementById('imageInput').value = '';
   };
-  
 
-  
+
+
   return (
     <div className='profile'>
       <div className='profile__topWrapper'>

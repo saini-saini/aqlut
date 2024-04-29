@@ -1,11 +1,10 @@
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
-import React, { useState } from 'react';
-import img from "../../../images/createMenuImg.png"
-import { Select } from 'antd';
-import close from "../../../images/close (1).png"
 import "./section.scss"
 import Avatar from '@mui/material/Avatar';
-
+import close from "../../../images/close (1).png"
+import img from "../../../images/createMenuImg.png"
+import { Select } from 'antd';
+import React, { useState } from 'react';
+import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 
 const CreateSection = ({ open, setOpen, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -33,44 +32,44 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                     <div style={{ paddingBottom: "25px" }}>
 
                         <Flex gap="middle" wrap="wrap">
-                        <div style={{ display: "flex", justifyContent: "center", width: "100%", height: "100%" }}>
-                            <label htmlFor="imageInput" style={{ cursor: "pointer" }}>
-                                {selectedImage ? (
-                                    <Avatar
-                                        src={URL.createObjectURL(selectedImage)}
-                                        alt="logo"
-                                        sx={{
+                            <div style={{ display: "flex", justifyContent: "center", width: "100%", height: "100%" }}>
+                                <label htmlFor="imageInput" style={{ cursor: "pointer" }}>
+                                    {selectedImage ? (
+                                        <Avatar
+                                            src={URL.createObjectURL(selectedImage)}
+                                            alt="logo"
+                                            sx={{
+                                                width: 135,
+                                                height: 114,
+                                                objectFit: "contain",
+                                                borderRadius: "20px",
+                                            }}
+                                        />
+                                    ) : (
+                                        <div style={{
                                             width: 135,
                                             height: 114,
                                             objectFit: "contain",
                                             borderRadius: "20px",
-                                        }}
-                                    />
-                                ) : (
-                                    <div style={{
-                                        width: 135,
-                                        height: 114,
-                                        objectFit: "contain",
-                                        borderRadius: "20px",
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        boxShadow: "0px 2px 8px 0px #00000040",
-                                    }}>
-                                        <img
-                                            src={img}
-                                            alt=""
-                                            style={{
-                                                width: "20px",
-                                                height: "20px"
-                                            }}
-                                        />
-                                    </div>
-                                )}
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            boxShadow: "0px 2px 8px 0px #00000040",
+                                        }}>
+                                            <img
+                                                src={img}
+                                                alt=""
+                                                style={{
+                                                    width: "20px",
+                                                    height: "20px"
+                                                }}
+                                            />
+                                        </div>
+                                    )}
 
-                            </label>
-                            <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
-                        </div>
+                                </label>
+                                <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
+                            </div>
                         </Flex>
                     </div>
 
@@ -86,7 +85,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                     borderRadius: "8px",
                                     outlineColor: "#F55A2C",
                                     border: "1px solid #F0F1F7",
-                                    padding:"13px 20px"
+                                    padding: "13px 20px"
                                 }}
                                 placeholder="enter section"
                             />
@@ -133,7 +132,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                     borderRadius: "8px",
                                     outlineColor: "#F55A2C",
                                     border: "1px solid #F0F1F7",
-                                    padding:"13px 20px"
+                                    padding: "13px 20px"
                                 }}
                                 placeholder="enter section"
                             />
@@ -150,7 +149,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                     borderRadius: "8px",
                                     outlineColor: "#F55A2C",
                                     border: "1px solid #F0F1F7",
-                                    padding:"13px 20px"
+                                    padding: "13px 20px"
                                 }}
                                 placeholder="enter description"
                                 multiline={true}
@@ -160,8 +159,8 @@ const CreateSection = ({ open, setOpen, onClose }) => {
 
                     </Flex>
 
-                    <Dialog.Close style={{ width: "48px", height: "48px",backgroundColor:'black' }}>
-                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer",padding:"10px", borderRadius:"50%"}} />
+                    <Dialog.Close style={{ width: "48px", height: "48px", backgroundColor: 'black' }}>
+                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer", padding: "10px", borderRadius: "50%" }} />
                     </Dialog.Close>
 
                     <Flex justify="center">

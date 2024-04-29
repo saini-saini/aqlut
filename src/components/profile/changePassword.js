@@ -1,7 +1,7 @@
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
-import React, { useState } from 'react';
 import "./profile.scss"
 import close from "../../images/close (1).png"
+import React, { useState } from 'react';
+import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
 const ChangePassword = ({ open, setOpen, onClose }) => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");

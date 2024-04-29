@@ -1,70 +1,68 @@
-import React, { useState } from 'react'
 import "./qr_menu.scss"
-import { Input, Table } from 'antd';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import BrushIcon from '@mui/icons-material/Brush';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { FormControlLabel, Switch, styled } from '@mui/material'
 import exportIcon from "../../../images/export.png"
-import { message, Upload } from 'antd';
 import filterIcon from "../../../images/filter.png"
+import DeleteIcon from '@mui/icons-material/Delete';
 import searchIcon from "../../../images/search (3).png"
-import QrCode2Icon from '@mui/icons-material/QrCode2';
-const QRMenuGroup = () => {
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Input, Table } from 'antd';
+import { message, Upload } from 'antd';
+import React, { useState } from 'react';
+import { FormControlLabel, Switch, styled } from '@mui/material'
 
-
-  const IOSSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-  ))(({ theme }) => ({
-    width: 45,
-    height: 20,
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 45,
+  height: 20,
+  padding: 0,
+  margin: 0,
+  '& .MuiSwitch-switchBase': {
     padding: 0,
-    margin: 0,
-    '& .MuiSwitch-switchBase': {
-      padding: 0,
-      margin: 2.4,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(25px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
-          opacity: 1,
-          border: 0,
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-          opacity: 0.5,
-        },
-      },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#33cf4d',
-        border: '6px solid #fff',
-      },
-      '&.Mui-disabled .MuiSwitch-thumb': {
-        color:
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[600],
+    margin: 2.4,
+    transitionDuration: '300ms',
+    '&.Mui-checked': {
+      transform: 'translateX(25px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+        opacity: 1,
+        border: 0,
       },
       '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+        opacity: 0.5,
       },
     },
-    '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
-      width: 15,
-      height: 15,
+    '&.Mui-focusVisible .MuiSwitch-thumb': {
+      color: '#33cf4d',
+      border: '6px solid #fff',
     },
-    '& .MuiSwitch-track': {
-      borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-      opacity: 1,
-      transition: theme.transitions.create(['background-color'], {
-        duration: 500,
-      }),
+    '&.Mui-disabled .MuiSwitch-thumb': {
+      color:
+        theme.palette.mode === 'light'
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
     },
-  }));
+    '&.Mui-disabled + .MuiSwitch-track': {
+      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxSizing: 'border-box',
+    width: 15,
+    height: 15,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    opacity: 1,
+    transition: theme.transitions.create(['background-color'], {
+      duration: 500,
+    }),
+  },
+}));
 
+const QRMenuGroup = () => {
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -152,7 +150,7 @@ const QRMenuGroup = () => {
         </div>
         <div>
           <FormControlLabel
-            style={{width:"13px", height:"20px"}}
+            style={{ width: "13px", height: "20px" }}
             control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
             className='profile__switch'
           />
@@ -168,13 +166,13 @@ const QRMenuGroup = () => {
         <button className='QRMenuGroup__createButton' >CREATE MENU GROUP</button>
       </div>
 
-     <div className='QRMenuGroup__bottomWrapper'>
+      <div className='QRMenuGroup__bottomWrapper'>
         <div style={{
           maxHeight: '438px', overflowY: 'auto', boxShadow: "0px 2px 8px 0px #3D6BC047", backgroundColor: "white", borderRadius: "10px"
         }}>
 
           <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }}>
-            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047"}} />
+            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} />
 
             <button style={{
               width: "120px",
@@ -218,13 +216,13 @@ const QRMenuGroup = () => {
             scroll={{
               y: 240,
             }}
-            style={{ padding: "0px 0px 11px 20px"}}
+            style={{ padding: "0px 0px 11px 20px" }}
             pagination={true}
             rowClassName={() => 'QRMenuGroup__customRow'}
-          /> 
+          />
         </div>
 
-      </div> 
+      </div>
 
 
     </div>

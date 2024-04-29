@@ -1,12 +1,12 @@
+import "./section.scss"
 import React from 'react'
-import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
+import cardImg from "../../../images/image 1.png"
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import cardImg from "../../../images/image 1.png"
+import DialogContent from '@mui/material/DialogContent';
+import { styled } from '@mui/material/styles';
 
-import "./section.scss"
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -17,7 +17,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function ViewItem({ open, setOpen }) {
-
 
     const handleClickOpen = () => {
         setOpen(true);

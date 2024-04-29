@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
 import './navBar.scss'
-import BellIcon from "../../images/bellIcon.png"
-import Avatar from '@mui/material/Avatar';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import icon from "../../images/icon.png";
+import Avatar from '@mui/material/Avatar';
+import BellIcon from "../../images/bellIcon.png"
 import ReorderIcon from '@mui/icons-material/Reorder';
-const NavBar = ({toggleSidebar}) => {
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import React, { useState } from 'react'
+const NavBar = ({ toggleSidebar }) => {
     const [openLogout, setOpenLogout] = useState(false)
 
     return (
