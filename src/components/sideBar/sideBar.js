@@ -30,8 +30,8 @@ const SideBar = () => {
   };
 
   return (
-    <nav className='sideBar'>
-      <Avatar alt="logo" src={profileLogo} sx={{ width: 90, height: 90, margin: "20px" }} />
+    <nav className='sideBar' >
+      <Avatar alt="logo" src={profileLogo?profileLogo :""} sx={{ width: 90, height: 90, margin: "20px" }} />
       <div>
         <div style={{ display: "flex", alignItems: "center" }}>
           {location.pathname === '/home' && (

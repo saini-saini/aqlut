@@ -6,7 +6,6 @@
     &__nabBar {
         width: calc(100% - 240px);
         height: 82px;
-        background-color: burlywood;
         position: absolute;
         right: 0;
     }
@@ -14,7 +13,6 @@
     &__sideBar {
         width: 240px;
         height: 100vh;
-
     }
 
     &__main {
@@ -25,3 +23,86 @@
         top: 82px;
     }
 }
+
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    .layout {
+        &__sideBar {
+           display: none;
+        }
+        
+        &__sideBar.visible {
+            display: block;
+            transform: translateX(0); 
+            z-index: 5;
+            position: absolute;
+            top: 82px;
+            height: calc(100vh - 82px);
+            background-color: white;
+        }
+        
+    &__nabBar {
+        width: 100%;
+       
+    }
+
+    &__main {
+        width: 100%;
+    }
+    }
+    }
+
+
+@media only screen and (min-width: 481px) and (max-width: 769px){
+    .layout {
+        &__sideBar {
+           display: none;
+        }
+        
+        &__sideBar.visible {
+            display: block;
+            transform: translateX(0); 
+            z-index: 5;
+            position: absolute;
+            top: 82px;
+            height: calc(100vh - 82px);
+            background-color: white;
+        }
+
+    &__nabBar {
+        width: 100%;
+       
+    }
+
+    &__main {
+        width: 100%;
+    }
+    }
+    }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px){
+        .layout {
+            &__sideBar {
+               display: none;
+            }
+            
+        &__nabBar {
+            width: 100%;
+           
+        }
+    
+        &__main {
+            width: 100%;
+        }
+
+        &__sideBar.visible {
+            display: block;
+            transform: translateX(0); 
+            z-index: 5;
+            position: absolute;
+            top: 82px;
+            height: calc(100vh - 82px);
+            background-color: white;
+        }
+
+        }
+        }

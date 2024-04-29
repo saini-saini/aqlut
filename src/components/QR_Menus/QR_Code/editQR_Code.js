@@ -2,10 +2,10 @@ import { Button, Dialog, Flex, Select, Text, TextField } from '@radix-ui/themes'
 import React from 'react';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Link } from 'react-router-dom';
-import QRCODE from "../../../images/QR code.png";
+import QRCODE from "../../../images/QR code.png"
 import close from "../../../images/close (1).png"
 
-const CreateQRCode = ({ open, setOpen, onClose }) => {
+const EditQRCode = ({ open, setOpen, onClose }) => {
 
     const handleClose = () => {
         setOpen(false);
@@ -22,7 +22,7 @@ const CreateQRCode = ({ open, setOpen, onClose }) => {
         <div>
             <Dialog.Root open={open} onClose={onClose} >
                 <Dialog.Content style={{ padding: "30px 26px 17px 26px", width: '413px',  height:"544px",borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: " 0px 10px 30px 0px #00000040", position:"relative" }}>
-                    <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create QR Code</Dialog.Title>
+                    <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Edit QR Code</Dialog.Title>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
 
@@ -87,7 +87,6 @@ const CreateQRCode = ({ open, setOpen, onClose }) => {
                     <img src={QRCODE} alt="" style={{ width: "160px", height: "160px" }} />
                 </div>
 
-               
                 <Dialog.Close style={{ width: "48px", height: "48px", backgroundColor: 'black' }}>
                         <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer", padding: "10px", borderRadius: "50%" }} />
                     </Dialog.Close>
@@ -121,4 +120,4 @@ const CreateQRCode = ({ open, setOpen, onClose }) => {
     )
 };
 
-export default CreateQRCode;
+export default EditQRCode;

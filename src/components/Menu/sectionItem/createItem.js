@@ -5,14 +5,14 @@ import img from "../../../images/createMenuImg.png"
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Select } from 'antd';
 import "./sectionItem.scss"
+import Avatar from '@mui/material/Avatar';
 
 const CreateItem = () => {
 
-    const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters', 'Staples', 'T-Shirts','Shoes'];
+    const OPTIONS = ['Apples', 'Nails', 'Bananas', 'Helicopters', 'Staples', 'T-Shirts', 'Shoes'];
     const [selectedItems, setSelectedItems] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
     const filteredOptions = OPTIONS.filter((o) => !selectedItems.includes(o));
-
-
 
 
     const getBase64 = (img, callback) => {
@@ -78,6 +78,12 @@ const CreateItem = () => {
         return isJpgOrPng && isLt2M;
     };
 
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+    };
+
+
     return (
         <div className='createItem'>
             <div className='createItem__topWrapper'>
@@ -90,37 +96,46 @@ const CreateItem = () => {
 
                     <div style={{ display: "flex", gap: "25px", alignItems: "center", paddingBottom: "35px" }}>
                         <div className='createItem__image'>
-                            <img src={img} alt="" style={{
-                                width: "20px", height: "20px"
-                            }} />
+                            {selectedImage ? (
+                                <Avatar
+                                    src={URL.createObjectURL(selectedImage)}
+                                    alt="logo"
+                                    sx={{
+                                        width: 135,
+                                        height: 114,
+                                        objectFit: "contain",
+                                        borderRadius: "20px",
+                                    }}
+                                />
+                            ) : (
+                                <div style={{
+                                    width: 135,
+                                    height: 114,
+                                    objectFit: "contain",
+                                    borderRadius: "20px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    boxShadow: "0px 2px 8px 0px #00000040",
+                                }}>
+                                    <img
+                                        src={img}
+                                        alt=""
+                                        style={{
+                                            width: "20px",
+                                            height: "20px"
+                                        }}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         <div className='createItem__btnWrapper'>
-                            {/* <button className='createItem__changeBtn'>change photo</button> */}
-                            <Flex gap="middle" wrap="wrap">
-                                <Upload
-                                    name="avatar"
-                                    className="avatar-uploader"
-                                    showUploadList={false}
-                                    action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                                    beforeUpload={beforeUpload}
-                                    onChange={handleChange}
-                                >
-                                    {imageUrl ? (
-                                        <img
-                                            src={imageUrl}
-                                            alt="avatar"
-                                            style={{
-                                                width: '100%',
-                                            }}
-                                        />
-                                    ) : (
-                                        uploadButton
-                                    )}
-                                </Upload>
-                            </Flex>
-
-                            <button className='createItem__removeBtn'>remove photo</button>
+                            <label htmlFor="imageInput" className='profile__changeBtn'>
+                                change photo
+                            </label>
+                            <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
+                            <button className='createItem__removeBtn' onClick={() => setSelectedImage(null)}>remove photo</button>
                         </div>
                     </div>
 
@@ -243,8 +258,8 @@ const CreateItem = () => {
                                         </div>
 
 
-                                        <div style={{display:'flex', flexDirection:"column", gap:"9px"}}>
-                                        <label className='createItem__label'>Alergies</label>
+                                        <div style={{ display: 'flex', flexDirection: "column", gap: "9px" }}>
+                                            <label className='createItem__label'>Alergies</label>
                                             <Select
                                                 mode="multiple"
                                                 placeholder="Inserted are removed"

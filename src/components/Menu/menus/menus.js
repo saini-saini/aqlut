@@ -4,6 +4,10 @@ import cardImg from "../../../images/image 1.png"
 import { FormControlLabel, Switch, styled } from '@mui/material'
 import CreateMenu from './createMenu'
 import info from "../../../images/info.png"
+import ViewItem from '../sections/view'
+import EditMenu from './editMenu'
+import Grid from '@mui/material/Unstable_Grid2';
+
 const Menus = () => {
 
   const IOSSwitch = styled((props) => (
@@ -58,8 +62,9 @@ const Menus = () => {
     },
   }));
 
-
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
+  const [editMenuOpen, setEditMenuOpen] = useState(false);
+  const [viewSectionOpen, setViewSectionOpen] = useState(false);
 
   const openCreateMenuDialog = () => {
     setCreateMenuOpen(true);
@@ -69,6 +74,21 @@ const Menus = () => {
     setCreateMenuOpen(false);
   };
 
+  const openEditMenuDialog = () => {
+    setEditMenuOpen(true);
+  };
+
+  const closeEditMenuDialog = () => {
+    setEditMenuOpen(false);
+  };
+
+  const openViewSectionDialog = () => {
+    setViewSectionOpen(true);
+  };
+
+  const closeViewSectionDialog = () => {
+    setViewSectionOpen(false);
+  };
 
   return (
     <div className='menus'>
@@ -77,9 +97,10 @@ const Menus = () => {
         <button className='menus__createButton' onClick={openCreateMenuDialog}>CREATE</button>
       </div>
 
-      <div className='menus__allCardsWrapper'>
-        <div className='menus__cardWrapper'>
-          <div className='menus__imgWrapper'>
+      <div container className='menus__allCardsWrapper'>
+
+        <div item className='menus__cardWrapper' >
+          <div className='menus__imgWrapper'  >
             <img src={cardImg} alt="" className='menus__img' />
           </div>
           <div className='menus__cardContent'>
@@ -101,14 +122,14 @@ const Menus = () => {
           </div>
           <div className='menus__cardAction'>
             <button className='menus__deleteButton'>Delete</button>
-            <button className='menus__editButton'>Edit</button>
+            <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
           </div>
           <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog} />
           </div>
         </div>
-        <div className='menus__cardWrapper'>
-          <div className='menus__imgWrapper'>
+        <div item className='menus__cardWrapper' >
+          <div className='menus__imgWrapper'  >
             <img src={cardImg} alt="" className='menus__img' />
           </div>
           <div className='menus__cardContent'>
@@ -130,14 +151,14 @@ const Menus = () => {
           </div>
           <div className='menus__cardAction'>
             <button className='menus__deleteButton'>Delete</button>
-            <button className='menus__editButton'>Edit</button>
+            <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
           </div>
           <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog} />
           </div>
         </div>
-        <div className='menus__cardWrapper'>
-          <div className='menus__imgWrapper'>
+        <div item className='menus__cardWrapper' >
+          <div className='menus__imgWrapper'  >
             <img src={cardImg} alt="" className='menus__img' />
           </div>
           <div className='menus__cardContent'>
@@ -159,14 +180,14 @@ const Menus = () => {
           </div>
           <div className='menus__cardAction'>
             <button className='menus__deleteButton'>Delete</button>
-            <button className='menus__editButton'>Edit</button>
+            <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
           </div>
           <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog} />
           </div>
         </div>
-        <div className='menus__cardWrapper'>
-          <div className='menus__imgWrapper'>
+        <div item className='menus__cardWrapper' >
+          <div className='menus__imgWrapper'  >
             <img src={cardImg} alt="" className='menus__img' />
           </div>
           <div className='menus__cardContent'>
@@ -188,14 +209,14 @@ const Menus = () => {
           </div>
           <div className='menus__cardAction'>
             <button className='menus__deleteButton'>Delete</button>
-            <button className='menus__editButton'>Edit</button>
+            <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
           </div>
           <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog} />
           </div>
         </div>
-        <div className='menus__cardWrapper'>
-          <div className='menus__imgWrapper'>
+        <div item className='menus__cardWrapper' >
+          <div className='menus__imgWrapper'  >
             <img src={cardImg} alt="" className='menus__img' />
           </div>
           <div className='menus__cardContent'>
@@ -217,16 +238,19 @@ const Menus = () => {
           </div>
           <div className='menus__cardAction'>
             <button className='menus__deleteButton'>Delete</button>
-            <button className='menus__editButton'>Edit</button>
+            <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
           </div>
           <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog} />
           </div>
         </div>
+
 
       </div>
 
       {createMenuOpen && <CreateMenu open={createMenuOpen} setOpen={setCreateMenuOpen} onClose={closeCreateMenuDialog} />}
+      {editMenuOpen && <EditMenu open={editMenuOpen} setOpen={setEditMenuOpen} onClose={closeEditMenuDialog} />}
+      {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
 
     </div>
   )

@@ -1,12 +1,21 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
-import React from 'react';
-import CancelIcon from '@mui/icons-material/Cancel';
+import React, { useState } from 'react';
+import close from "../../images/close (1).png"
+
 const ForgetPassword = ({ open, setOpen, onClose }) => {
+    const [email, setEmail] = useState('');
 
     const handleClose = () => {
         setOpen(false);
         onClose(false);
     };
+
+    const handleReset = () => {
+        console.log("Reset password for email:", {
+            email: email
+        });
+    };
+
 
     return (
         <div>
@@ -26,12 +35,14 @@ const ForgetPassword = ({ open, setOpen, onClose }) => {
                                     outlineColor: "#F55A2C",
                                 }}
                                 placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </label>
                     </Flex>
 
-                    <Dialog.Close style={{ width: "48px", height: "48px" }}>
-                        <CancelIcon onClick={handleClose} style={{ position: "absolute", top: "0px", right: "0px", cursor: "pointer" }} />
+                    <Dialog.Close style={{ width: "48px", height: "48px",backgroundColor:'black' }}>
+                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer",padding:"10px", borderRadius:"50%"}} />
                     </Dialog.Close>
 
                     <Flex justify="center">
@@ -51,6 +62,7 @@ const ForgetPassword = ({ open, setOpen, onClose }) => {
                                     marginTop: "30px",
                                     cursor: "pointer",
                                 }}
+                                onClick={handleReset}
                             >Reset</Button>
                         </Dialog.Close>
                     </Flex>

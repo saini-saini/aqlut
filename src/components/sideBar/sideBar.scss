@@ -5,14 +5,19 @@
     border: 1px solid #D7D7D7;
     display: flex;
     flex-direction: column;
-overflow-y: scroll;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
         display: none;
     }
+
     &__icon {
         width: 20px;
         height: 24px;
+    }
+
+    &.open {
+        transform: translateX(0);
     }
 
 
@@ -78,7 +83,7 @@ overflow-y: scroll;
 
     .active {
         color: #F55A2C
-      }
+    }
 }
 
 
@@ -88,11 +93,29 @@ overflow-y: scroll;
 }
 
 .css-wf0rzb-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
-height: 44px !important;
-min-height: 0px !important;
+    height: 44px !important;
+    min-height: 0px !important;
 }
 
 .css-o7hwxq-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
     height: 44px !important;
     min-height: 0px !important;
+}
+
+@media only screen and (min-width: 481px) and (max-width: 769px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 999;
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 999;
+        display: block;
+    }
 }

@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(215, 215, 215, 0.32);
+
     &::-webkit-scrollbar {
         display: none;
     }
@@ -19,7 +20,7 @@
         padding: 33px 33px 0px 33px;
     }
 
-    
+
     &__createButton {
         width: 140px;
         height: 42px;
@@ -36,14 +37,15 @@
         box-shadow: 0px 2px 16px 0px #3D6BC040;
     }
 
- &__bottomWrapper{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 19px;
-    padding: 19px 36px;
+    &__bottomWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 19px;
+        padding: 19px 36px;
 
- }
+    }
+
     &__title {
         font-weight: 600;
         font-size: 24px;
@@ -55,14 +57,14 @@
 
     }
 
-    &__customSelect{
-            width: 100% ;
-            background-color: red ; 
-          height: 55px;
-          border-radius: 8px;
-          border: 1px solid #F0F1F7; 
-          
-          .ant-space-item {
+    &__customSelect {
+        width: 100%;
+        background-color: red;
+        height: 55px;
+        border-radius: 8px;
+        border: 1px solid #F0F1F7;
+
+        .ant-space-item {
             width: 100%;
         }
     }
@@ -169,7 +171,7 @@
         border: 1px solid white
     }
 
-    
+
     &__cardHeading {
         display: flex;
         justify-content: space-between;
@@ -203,7 +205,7 @@
         color: #878787;
     }
 
-    &__info{
+    &__info {
         position: absolute;
         top: 13px;
         right: 12px;
@@ -211,3 +213,71 @@
         cursor: pointer;
     }
 }
+
+
+.view {
+    .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+        width: 413px !important;
+        height: 423px !important;
+        border-radius: 16px !important;
+        box-shadow: 0px 10px 30px 0px #00000040;
+        position: relative;
+    }
+
+    .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+        overflow-y:visible;
+    }
+    .close:hover {
+        background-color: black;
+    }
+
+    &__title {
+        font-family: "Jost";
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 22.41px;
+        text-align: left;
+        color: #202020;
+        margin: 0px;
+    }
+
+    &__info {
+        font-family: "Jost";
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14.94px;
+        text-align: left;
+        color: #838383;
+        margin: 0px;
+    }
+
+    &__desc {
+        font-family: "Manrope", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17.43px;
+        text-align: left;
+        color: #878787;
+        margin: 0px;
+        width: 378px;
+    }
+
+    &__contentWrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+// .rt-BaseDialogScroll{
+//     overflow-y: scroll;
+//     &::-webkit-scrollbar {
+//         display: none;
+//     }
+// }

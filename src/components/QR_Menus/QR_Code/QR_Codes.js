@@ -12,6 +12,7 @@ import searchIcon from "../../../images/search (3).png"
 import { useNavigate } from 'react-router-dom';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 import CreateQRCode from './createQR_Code';
+import EditQRCode from './editQR_Code';
 const QRCodes = () => {
 
 
@@ -118,6 +119,7 @@ const QRCodes = () => {
   const navigate = useNavigate();
 
   const [createQROpen, setCreateQROpen] = useState(false);
+  const [editQROpen, setEditQROpen] = useState(false);
 
   const openCreateQRDialog = () => {
     setCreateQROpen(true);
@@ -127,6 +129,14 @@ const QRCodes = () => {
     setCreateQROpen(false);
   };
 
+
+  const openEditQRDialog = () => {
+    setEditQROpen(true);
+  };
+
+  const closeEditQRDialog = () => {
+    setEditQROpen(false);
+  };
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
@@ -168,16 +178,16 @@ const QRCodes = () => {
       qrCodeName: `Table ${i}`,
       qrSource: "Dine In",
       groupName: "Outside Tables",
-      qrCode: <QrCode2Icon/>,
+      qrCode: <QrCode2Icon />,
       action: <div style={{ display: "flex", gap: "45px", alignItems: "center" }}>
         <div style={{ display: "flex", gap: "13px", alignItems: "center", cursor: "pointer" }}>
           <VisibilityIcon />
-          <BrushIcon color='warning' />
+          <BrushIcon color='warning' onClick={openEditQRDialog} />
           <DeleteIcon />
         </div>
         <div>
           <FormControlLabel
-            style={{width:"13px", height:"20px"}}
+            style={{ width: "13px", height: "20px" }}
             control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
             className='profile__switch'
           />
@@ -193,7 +203,7 @@ const QRCodes = () => {
         <button className='QRCode__createButton' onClick={openCreateQRDialog}>CREATE QR CODE</button>
       </div>
 
-     <div className='QRCode__bottomWrapper'>
+      <div className='QRCode__bottomWrapper'>
         <div style={{
           maxHeight: '438px', overflowY: 'auto', boxShadow: "0px 2px 8px 0px #3D6BC047", backgroundColor: "white", borderRadius: "10px"
         }}>
@@ -243,15 +253,16 @@ const QRCodes = () => {
             scroll={{
               y: 240,
             }}
-            style={{ padding: "0px 0px 11px 20px"}}
+            style={{ padding: "0px 0px 11px 20px" }}
             pagination={true}
             rowClassName={() => 'QRCode__customRow'}
-          /> 
+          />
         </div>
 
-      </div> 
+      </div>
 
       {createQROpen && <CreateQRCode open={createQROpen} setOpen={setCreateQROpen} onClose={closeCreateQRDialog} />}
+      {editQROpen && <EditQRCode open={editQROpen} setOpen={setEditQROpen} onClose={closeEditQRDialog} />}
 
     </div>
   )

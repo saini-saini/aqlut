@@ -213,7 +213,6 @@ const SectionItems = () => {
 
           <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }}>
             <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} />
-
             <button style={{
               width: "120px",
               height: "42px",
@@ -227,7 +226,6 @@ const SectionItems = () => {
                 <img src={filterIcon} alt="" style={{ width: "20px", height: "20px" }} /><span style={{ color: "#A1A1A1", fontFamily: "Montserrat", fontSize: "14px", fontWeight: "600", lineHeight: "17.07px", textAlign: "left" }}>Filter</span>
               </div>
             </button>
-
 
             <Upload
               name="avatar"
@@ -266,13 +264,9 @@ const SectionItems = () => {
             }}
             rowClassName={() => 'sectionItem__customRow'}
           />
-
-
-
         </div>
 
       </div>
-
 
       <Drawer
         title={
@@ -287,7 +281,9 @@ const SectionItems = () => {
         key={placement}
       // style={{ width: "398px" }}
       >
+<div style={{display:'flex', flexDirection:"column", gap:"34px"}}>
 
+        <div style={{display:"flex", flexDirection:"column", gap:"22px"}}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
           <p style={{
             margin: "0px",
@@ -523,16 +519,18 @@ const SectionItems = () => {
             </div>
           </div>
         </div>
+        </div>
 
         <div style={{
           display: "flex",
           gap: "12px",
-          height: "120px",
+          // height: "120px",
           alignItems: "flex-end"
         }}>
           <button className='sectionItem__resetBtn'>Reset</button>
           <button className='sectionItem__applyBtn'>Apply</button>
         </div>
+</div>
       </Drawer>
 
     </div>

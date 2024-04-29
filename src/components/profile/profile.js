@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import "./profile.scss"
-import profileLogo from "../../images/profileSectionImg1.png"
 import { Button, FormControlLabel, Switch, styled } from '@mui/material'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import shop from "../../images/shop.png"
@@ -20,112 +19,70 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-
-
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import Avatar from '@mui/material/Avatar';
+import img from "../../images/createMenuImg.png"
+
+
+
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  margin: 0,
+  '& .MuiSwitch-switchBase': {
+    padding: 0,
+    margin: 2,
+    transitionDuration: '300ms',
+    '&.Mui-checked': {
+      transform: 'translateX(16px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+        opacity: 1,
+        border: 0,
+      },
+      '&.Mui-disabled + .MuiSwitch-track': {
+        opacity: 0.5,
+      },
+    },
+    '&.Mui-focusVisible .MuiSwitch-thumb': {
+      color: '#33cf4d',
+      border: '6px solid #fff',
+    },
+    '&.Mui-disabled .MuiSwitch-thumb': {
+      color:
+        theme.palette.mode === 'light'
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    '&.Mui-disabled + .MuiSwitch-track': {
+      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxSizing: 'border-box',
+    width: 22,
+    height: 22,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    opacity: 1,
+    transition: theme.transitions.create(['background-color'], {
+      duration: 500,
+    }),
+  },
+}));
 
 const Profile = () => {
 
-  const IOSSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-  ))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    margin: 0,
-    '& .MuiSwitch-switchBase': {
-      padding: 0,
-      margin: 2,
-      transitionDuration: '300ms',
-      '&.Mui-checked': {
-        transform: 'translateX(16px)',
-        color: '#fff',
-        '& + .MuiSwitch-track': {
-          backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
-          opacity: 1,
-          border: 0,
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-          opacity: 0.5,
-        },
-      },
-      '&.Mui-focusVisible .MuiSwitch-thumb': {
-        color: '#33cf4d',
-        border: '6px solid #fff',
-      },
-      '&.Mui-disabled .MuiSwitch-thumb': {
-        color:
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[600],
-      },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-      },
-    },
-    '& .MuiSwitch-thumb': {
-      boxSizing: 'border-box',
-      width: 22,
-      height: 22,
-    },
-    '& .MuiSwitch-track': {
-      borderRadius: 26 / 2,
-      backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-      opacity: 1,
-      transition: theme.transitions.create(['background-color'], {
-        duration: 500,
-      }),
-    },
-  }));
-
-
-  const StyledPhoneInput = styled(PhoneInput)`
-  .PhoneInputInput {
-    outline: none;
-    height: 42px;
-    border-radius: 8px;
-    border:none;
-    width: 375px;
-  }
-
-  .PhoneInputInput:focus {
-    box-shadow: 0px 2px 8px 0px #F55A2C;       
-  }
-`;
-
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
-
-  const MyButton = styled(Button)({
-    '&:hover': {
-      backgroundColor: 'inherit',
-    },
-  });
-
   const [value, setValue] = useState()
-
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
-
-  const openChangePasswordDialog = () => {
-    setChangePasswordOpen(true);
-  };
-
-  const closeChangePasswordDialog = () => {
-    setChangePasswordOpen(false);
-  };
-
-
-
+  const [selectedImage, setSelectedImage] = useState(null);
   const [dayChecked, setDayChecked] = useState({
     sunday: false,
     monday: false,
@@ -136,6 +93,14 @@ const Profile = () => {
     saturday: false,
   });
 
+  const openChangePasswordDialog = () => {
+    setChangePasswordOpen(true);
+  };
+
+  const closeChangePasswordDialog = () => {
+    setChangePasswordOpen(false);
+  };
+
   const handleDayCheckboxChange = (day) => (event) => {
     setDayChecked((prev) => ({
       ...prev,
@@ -143,7 +108,18 @@ const Profile = () => {
     }));
   };
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
+  };
+  
+  const removeImage = () => {
+    setSelectedImage(null);
+    document.getElementById('imageInput').value = '';
+  };
+  
 
+  
   return (
     <div className='profile'>
       <div className='profile__topWrapper'>
@@ -156,22 +132,45 @@ const Profile = () => {
         <div className='profile__centerWrapper'>
           <div className='profile__centerLeft'>
             <div className='profile__logoImgWrapper'>
-              <img src={profileLogo} alt="profileLogo" className='profile__logoImg' />
+              {selectedImage ? (
+                <Avatar
+                  src={URL.createObjectURL(selectedImage)}
+                  alt="logo"
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: "contain",
+                    borderRadius: "50%",
+                  }}
+                />
+              ) : (
+                <div style={{
+                  width: "100%",
+                  height: '100%',
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  boxShadow: "0px 2px 8px 0px #00000040",
+                }}>
+                  <img
+                    src={img}
+                    alt=""
+                    style={{
+                      width: "20px",
+                      height: "20px"
+                    }}
+                  />
+                </div>
+              )}
             </div>
             <div className='profile__btnWrapper'>
-              {/* <button className='profile__changeBtn'>change photo</button> */}
-              <MyButton
-                component="label"
-                role={undefined}
-                variant="contained"
-                tabIndex={-1}
-                sx={{ width: "195px", height: "42px", borderRadius: "10px", color: "#F55A2C", backgroundColor: "white", boxShadow: "0px 2px 16px 0px #3D6BC040", border: "1px solid #F55A2C" }}
-              >
+              <label htmlFor="imageInput" className='profile__changeBtn'>
                 change photo
-                <VisuallyHiddenInput type="file" />
-              </MyButton>
-
-              <button className='profile__removeBtn'>remove photo</button>
+              </label>
+              <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
+              <button className='profile__removeBtn' onClick={removeImage}>remove photo</button>
             </div>
           </div>
           <div>
@@ -258,14 +257,14 @@ const Profile = () => {
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                     <label className='profile__label'><img src={calender} alt="" className='profile__inputIcon' /><span>Opening Times</span></label>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div style={{ display: "flex", flexDirection: "column" }} className='profile__dayContainer'>
                       {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
-                        <div key={day} style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "end" }}>
-                          <div>
+                        <div key={day} style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "end" }} className='profile__day'>
+                          <div className='profile__daylabelWrapper'>
                             <label className='profile__daylabel'>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
                           </div>
 
-                          <div style={{ display: "flex", gap: "25px", alignItems: "center" }}>
+                          <div style={{ display: "flex", gap: "25px", alignItems: "center" }} className='profile__dayTime'>
                             <div>
                               <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DemoContainer components={['TimePicker']}>

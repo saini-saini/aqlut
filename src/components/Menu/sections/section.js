@@ -4,7 +4,8 @@ import { Select } from 'antd';
 import { FormControlLabel, Switch, styled } from '@mui/material'
 import cardImg from "../../../images/image 1.png"
 import CreateSection from './createSection';
-import info from "../../../images/info.png"
+import info from "../../../images/info.png";
+import ViewItem from './view';
 const Section = () => {
 
 
@@ -61,6 +62,8 @@ const Section = () => {
   }));
 
   const [createSectionOpen, setCreateSectionOpen] = useState(false);
+  const [viewSectionOpen, setViewSectionOpen] = useState(false);
+
 
   const openCreateSectionDialog = () => {
     setCreateSectionOpen(true);
@@ -70,6 +73,14 @@ const Section = () => {
     setCreateSectionOpen(false);
   };
 
+
+  const openViewSectionDialog = () => {
+    setViewSectionOpen(true);
+  };
+
+  const closeViewSectionDialog = () => {
+    setViewSectionOpen(false);
+  };
 
 
   const handleChange = (value) => {
@@ -138,7 +149,36 @@ const Section = () => {
               <button className='section__editButton'>Edit</button>
             </div>
             <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog}/>
+          </div>
+          </div>
+          <div className='section__cardWrapper'>
+            <div className='section__imgWrapper'>
+              <img src={cardImg} alt="" className='section__img' />
+            </div>
+            <div className='section__cardContent'>
+              <div className='section__cardHeading'>
+                <p className='section__cardTitle'>New Year Menu</p>
+                <div>
+                  <FormControlLabel
+                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                    className='profile__switch'
+                  />
+                </div>
+              </div>
+              <div className='section__cardDescriptionWrapper'>
+                <p className='section__cardDescription'>
+                  Lorem Ipsum is simply dummy text of  the
+                  printing and typesetting industry.
+                </p>
+              </div>
+            </div>
+            <div className='section__cardAction'>
+              <button className='section__deleteButton'>Delete</button>
+              <button className='section__editButton'>Edit</button>
+            </div>
+            <div className='menus__info' >
+            <img src={info} alt="info" onClick={openViewSectionDialog}/>
           </div>
           </div>
           <div className='section__cardWrapper'>
@@ -167,7 +207,7 @@ const Section = () => {
               <button className='section__editButton'>Edit</button>
             </div>
             <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog}/>
           </div>
           </div>
           <div className='section__cardWrapper'>
@@ -196,7 +236,7 @@ const Section = () => {
               <button className='section__editButton'>Edit</button>
             </div>
             <div className='menus__info'>
-            <img src={info} alt="info" />
+            <img src={info} alt="info" onClick={openViewSectionDialog}/>
           </div>
           </div>
           <div className='section__cardWrapper'>
@@ -224,42 +264,14 @@ const Section = () => {
               <button className='section__deleteButton'>Delete</button>
               <button className='section__editButton'>Edit</button>
             </div>
-            <div className='menus__info'>
-            <img src={info} alt="info" />
-          </div>
-          </div>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
-                </div>
-              </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info'>
-            <img src={info} alt="info" />
+            <div className='menus__info' onClick={openViewSectionDialog}>
+            <img src={info} alt="info" onClick={openViewSectionDialog}/>
           </div>
           </div>
 
         </div>
         {createSectionOpen && <CreateSection open={createSectionOpen} setOpen={setCreateSectionOpen} onClose={closeCreateSectionDialog} />}
+        {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
 
       </div>
     </div>

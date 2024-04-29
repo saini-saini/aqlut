@@ -180,7 +180,7 @@
         opacity: 1;
     }
 
-    &__info{
+    &__info {
         position: absolute;
         top: 13px;
         right: 12px;
@@ -189,3 +189,52 @@
     }
 }
 
+// //Mobile devices
+// @media only screen and (min-width: 320px) and (max-width: 480px) {
+//     .menus {
+//         &__allCardsWrapper {
+//             grid-template-columns: repeat(1, 1fr);
+//         }
+//     }
+
+//     .createMenuContainer {
+//         width: 300px !important;
+//     }
+
+// }
+
+// //Tablets and iPads
+// @media only screen and (min-width: 580px) and (max-width: 769px) {
+//     .menus {
+
+//         &__cardWrapper{
+//             width: 300px;
+//         }
+
+//         &__allCardsWrapper {
+//             grid-template-columns: repeat(2, 1fr);
+//         }
+//     }
+// }
+
+// //Small screens and laptops
+// @media only screen and (min-width: 769px) and (max-width: 1024px) {
+
+//     .menus {
+
+//         &__allCardsWrapper {
+//             grid-template-columns: repeat(2, 1fr);
+//         }
+//     }
+// }
+
+
+// //Desktops and large screens
+// @media only screen and (min-width: 1025px) and (max-width: 1200px) {
+//     .menus {
+
+//         &__allCardsWrapper {
+//             grid-template-columns: repeat(2, 1fr);
+//         }
+//     }
+// }

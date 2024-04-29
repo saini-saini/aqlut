@@ -1,56 +1,86 @@
 import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
-import React from 'react';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { styled } from '@mui/material';
+import React, { useState } from 'react';
+import close from "../../../images/close (1).png"
+import Avatar from '@mui/material/Avatar';
 import img from "../../../images/createMenuImg.png"
 const CreateMenu = ({ open, setOpen, onClose }) => {
 
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-    });
-
-    const MyButton = styled(Button)({
-        '&:hover': {
-            backgroundColor: 'inherit',
-        },
-    });
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const handleClose = () => {
         setOpen(false);
         onClose(false);
     };
 
+    const handleSubmit = () => {
+        if (!selectedImage) {
+            console.log("Image not uploaded.");
+            return;
+        }
+        console.log("values:", {
+            name: name,
+            description: description,
+            image: selectedImage
+        });
+        setName("");
+        setDescription("");
+        setSelectedImage(null);
+    };
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+    };
+
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
-                <Dialog.Content style={{ width: '413px', height: '499px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }}>
+                <Dialog.Content style={{ width: '413px', height: '499px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }} className='createMenuContainer'>
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create Menu</Dialog.Title>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
+                        <div style={{ display: "flex", justifyContent: "center", width: "100%", height: "100%" }}>
+                            <label htmlFor="imageInput" style={{ cursor: "pointer" }}>
+                                {selectedImage ? (
+                                    <Avatar
+                                        src={URL.createObjectURL(selectedImage)}
+                                        alt="logo"
+                                        sx={{
+                                            width: 135,
+                                            height: 114,
+                                            objectFit: "contain",
+                                            borderRadius: "20px",
+                                        }}
+                                    />
+                                ) : (
+                                    <div style={{
+                                        width: 135,
+                                        height: 114,
+                                        objectFit: "contain",
+                                        borderRadius: "20px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        boxShadow: "0px 2px 8px 0px #00000040",
+                                    }}>
+                                        <img
+                                            src={img}
+                                            alt=""
+                                            style={{
+                                                width: "20px",
+                                                height: "20px"
+                                            }}
+                                        />
+                                    </div>
+                                )}
 
-                        <MyButton
-                            onClick={() => console.log('clicked')}
-                            component="label"
-                            role={undefined}
-                            variant="contained"
-                            tabIndex={-1}
-                            sx={{ width: "135px", height: "114px", borderRadius: "10px", color: "#F55A2C", backgroundColor: "white", boxShadow: "0px 2px 8px 0px #00000040", borderRight: "20px" }}
-                        >
-                            <img src={img} alt="" style={{
-                                width: "20px", height: "20px"
-                            }} />
-                            <VisuallyHiddenInput type="file" />
-                        </MyButton>
+                            </label>
+                            <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
+                        </div>
 
-                        <label style={{ width: "353px", height: "72px" }}>
+                        <label style={{ width: "353px", height: "72px" }} className='createMenuLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Name
                             </Text>
@@ -61,9 +91,12 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                     borderRadius: "8px",
                                     outlineColor: "#F55A2C",
                                     border: "1px solid #F0F1F7",
-                                    padding:"13px 20px"
+                                    padding: "13px 20px"
                                 }}
+                                className='createMenuInput'
                                 placeholder="enter name"
+                                onChange={(e) => setName(e.target.value)}
+                                value={name}
                             />
                         </label>
                         <label style={{ width: "352px", height: "72px" }}>
@@ -77,9 +110,11 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                     borderRadius: "8px",
                                     outlineColor: "#F55A2C",
                                     border: "1px solid #F0F1F7",
-                                    padding:"13px 20px"
+                                    padding: "13px 20px"
                                 }}
                                 placeholder="enter description"
+                                onChange={(e) => setDescription(e.target.value)}
+                                value={description}
                                 multiline={true}
                                 rows={4}
                             />
@@ -87,8 +122,8 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
 
                     </Flex>
 
-                    <Dialog.Close style={{ width: "48px", height: "48px" }}>
-                        <CancelIcon onClick={handleClose} style={{ position: "absolute", top: "0px", right: "0px", cursor: "pointer" }} />
+                    <Dialog.Close style={{ width: "48px", height: "48px", backgroundColor: 'black' }}>
+                        <img src={close} alt="" onClick={handleClose} style={{ width: "48px", height: "48px", position: "absolute", top: "-24px", right: "-22px", cursor: "pointer", padding: "10px", borderRadius: "50%" }} />
                     </Dialog.Close>
 
                     <Flex justify="center">
@@ -109,8 +144,8 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                     cursor: "pointer",
                                     fontFamily: "Montserrat",
                                     boxShadow: "0px 2px 16px 0px #3D6BC040"
-
                                 }}
+                                onClick={handleSubmit}
                             >SUBMIT</Button>
                         </Dialog.Close>
                     </Flex>

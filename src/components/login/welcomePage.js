@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 const WelcomePage = () => {
 const navigate = useNavigate();
 
-const handleContinue = () => {
+const handleContinue = (values) => {
     navigate('/login')
-    console.log('clicked')
+    console.log(values)
 }
     return (
         <div className='welcomeForm'>
