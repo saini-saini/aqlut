@@ -552,7 +552,27 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-nxo287-MuiInputBase-inpu
 
 //small screens and laptops
 @media only screen and (min-width: 769px) and (max-width: 1024px){
+    .profile{
+        &__formWrapper {
+            flex-direction: column;
+        }
+        &__day {
+            flex-direction: column !important;
+            gap: 0px !important;
+        }
 
+        &__daylabelWrapper {
+            width: 100%;
+        }
+
+        &__daylabel {
+            text-align: start;
+        }
+
+        &__dayContainer {
+            gap: 20px !important;
+        }
+    }
 }
 
 //Desktops and large screens

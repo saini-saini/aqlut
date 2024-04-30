@@ -11,6 +11,9 @@
         display: none;
     }
 
+    &__table {
+        padding: 0px 20px 11px 20px !important;
+    }
 
     &__topWrapper {
         display: flex;
@@ -77,7 +80,7 @@
 }
 
 .ant-pagination-item-active {
-    border:2px solid #F0F1F7 !important;
+    border: 2px solid #F0F1F7 !important;
 }
 
 .css-dev-only-do-not-override-1kuana8 .ant-pagination .ant-pagination-item-active a {
@@ -90,33 +93,33 @@
 }
 
 
-.QRMenuGroup .ant-table-thead > tr > th:nth-child(1),
-.QRMenuGroup .ant-table-tbody > tr > td:nth-child(1) {
-  border-radius: 8px 0 0 8px;
-  border-top: 1px solid #F0F1F7;
-  border-bottom: 1px solid #F0F1F7;
-  border-left: 1px solid #F0F1F7;
-  margin-bottom: 19px !important;
+.QRMenuGroup .ant-table-thead>tr>th:nth-child(1),
+.QRMenuGroup .ant-table-tbody>tr>td:nth-child(1) {
+    border-radius: 8px 0 0 8px;
+    border-top: 1px solid #F0F1F7;
+    border-bottom: 1px solid #F0F1F7;
+    border-left: 1px solid #F0F1F7;
+    margin-bottom: 19px !important;
 
 
 }
 
-.QRMenuGroup .ant-table-thead > tr > th:nth-child(3),
-.QRMenuGroup .ant-table-tbody > tr > td:nth-child(3) {
-  border-top: 1px solid #F0F1F7;
-  border-bottom: 1px solid #F0F1F7;
-  border-right: 1px solid #F0F1F7;
-  border-radius: 0 8px 8px 0;
-  margin-bottom: 19px !important;
+.QRMenuGroup .ant-table-thead>tr>th:nth-child(3),
+.QRMenuGroup .ant-table-tbody>tr>td:nth-child(3) {
+    border-top: 1px solid #F0F1F7;
+    border-bottom: 1px solid #F0F1F7;
+    border-right: 1px solid #F0F1F7;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 19px !important;
 
 
 }
 
-.QRMenuGroup .ant-table-thead > tr > th:nth-child(2),
-.QRMenuGroup .ant-table-tbody > tr > td:nth-child(2) {
-  border-top: 1px solid #F0F1F7;
-  border-bottom: 1px solid #F0F1F7;
-  margin-bottom: 19px !important;
+.QRMenuGroup .ant-table-thead>tr>th:nth-child(2),
+.QRMenuGroup .ant-table-tbody>tr>td:nth-child(2) {
+    border-top: 1px solid #F0F1F7;
+    border-bottom: 1px solid #F0F1F7;
+    margin-bottom: 19px !important;
 }
 
 
@@ -195,13 +198,13 @@
 
     }
 
-    &__label{
+    &__label {
         font-family: "Montserrat";
         font-size: 12px;
         font-weight: 400;
         line-height: 14.63px;
         text-align: left;
-        
+
     }
 
     &__btnWrapper {
@@ -291,9 +294,159 @@
 :where(.css-dev-only-do-not-override-1kuana8).ant-input-outlined:focus-within {
     border-color: white !important;
     box-shadow: 0px 2px 8px 0px #F55A2C !important;
-    
-    }
-    
-    :where(.css-dev-only-do-not-override-1kuana8).ant-input-outlined:hover {
-        border-color: white !important;    
+
+}
+
+:where(.css-dev-only-do-not-override-1kuana8).ant-input-outlined:hover {
+    border-color: white !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .QRMenuGroup {
+
+        &__tableTop {
+            display: flex !important;
+            flex-direction: column !important;
         }
+
+        &__bottomWrapper {
+            padding: 19px 20px 0px 20px !important;
+        }
+
+        &__bottom {
+            max-height: 500px !important;
+        }
+
+        &__search {
+            width: 100% !important;
+        }
+
+        &__filter {
+            width: 100%;
+
+        }
+
+        &__table {
+            padding: 0px 20px 11px 20px !important;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>td {
+            overflow: scroll;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table-pagination-right {
+            gap: 20px;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-item {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+}
+
+@media only screen and (min-width: 481px) and (max-width: 769px) {
+    .QRMenuGroup {
+        &__table {
+            padding: 0px 20px 11px 20px !important;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>td {
+            overflow: scroll;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table-pagination-right {
+            gap: 20px;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-item {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .QRMenuGroup {
+        &__table {
+            padding: 0px 20px 11px 20px !important;
+        }
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>td {
+            overflow: scroll;
+        }
+    }
+}

@@ -199,13 +199,13 @@ const QRCodes = () => {
       </div>
 
       <div className='QRCode__bottomWrapper'>
-        <div style={{
+        <div className='QRCode__bottom' style={{
           maxHeight: '438px', overflowY: 'auto', boxShadow: "0px 2px 8px 0px #3D6BC047", backgroundColor: "white", borderRadius: "10px"
         }}>
 
-          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }}>
-            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} />
-
+          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }} className="QRCode__tableTop">
+            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }}className="QRCode__search" />
+            <div style={{ display: "flex", gap: "10px" }} className="QRCode__filter">
             <button style={{
               width: "120px",
               height: "42px",
@@ -219,7 +219,7 @@ const QRCodes = () => {
               </div>
             </button>
 
-
+            <div className="QRCode__upload">
             <Upload
               name="avatar"
               className="avatar-uploader"
@@ -241,9 +241,12 @@ const QRCodes = () => {
               )}
             </Upload>
           </div>
+          </div>
+            </div>
           <Table
             columns={columns}
             dataSource={data}
+            className='QRCode__table'
             size='small'
             scroll={{
               y: 240,

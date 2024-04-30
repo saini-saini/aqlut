@@ -26,7 +26,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
-                <Dialog.Content style={{ width: '450px', height: '704px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }}>
+                <Dialog.Content style={{ width: '450px', height: '704px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }} className='createSectionContainer'> 
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create Section</Dialog.Title>
 
                     <div style={{ paddingBottom: "25px" }}>
@@ -74,7 +74,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                     </div>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
-                        <label style={{ width: "353px", height: "66px" }}>
+                        <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Section
                             </Text>
@@ -91,7 +91,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                             />
                         </label>
 
-                        <label style={{ width: "353px", height: "66px" }}>
+                        <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Menus
                             </Text>
@@ -121,7 +121,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                             />
                         </label>
 
-                        <label style={{ width: "353px", height: "66px" }}>
+                        <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Sort Order ID
                             </Text>
@@ -138,7 +138,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                             />
                         </label>
 
-                        <label style={{ width: "352px", height: "126px" }}>
+                        <label style={{ width: "352px", height: "126px" }} className='createSectionLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Description
                             </Text>

@@ -37,12 +37,12 @@ const EditMenu = ({ open, setOpen, onClose }) => {
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
-                <Dialog.Content style={{ width: '413px', height: '499px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }}>
+                <Dialog.Content style={{ width: '413px', height: '499px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }} className='editMenuContainer'>
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Edit Menu</Dialog.Title>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
                         <div style={{ display: "flex", justifyContent: "center", width: "100%", height: "100%" }}>
-                            <label htmlFor="imageInput" style={{ cursor: "pointer" }}>
+                            <label htmlFor="imageInput" style={{ cursor: "pointer" }} >
                                 {selectedImage ? (
                                     <Avatar
                                         src={URL.createObjectURL(selectedImage)}
@@ -80,7 +80,7 @@ const EditMenu = ({ open, setOpen, onClose }) => {
                             <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
                         </div>
 
-                        <label style={{ width: "353px", height: "72px" }}>
+                        <label style={{ width: "353px", height: "72px" }} className='editMenuLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Name
                             </Text>
@@ -98,7 +98,7 @@ const EditMenu = ({ open, setOpen, onClose }) => {
                                 value={name}
                             />
                         </label>
-                        <label style={{ width: "352px", height: "72px" }}>
+                        <label style={{ width: "352px", height: "72px" }} className='editMenuLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Description
                             </Text>

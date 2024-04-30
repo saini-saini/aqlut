@@ -26,7 +26,7 @@ function ViewItem({ open, setOpen }) {
     };
 
     return (
-        <div >
+        <div className="viewWrapper">
             <React.Fragment>
                 <BootstrapDialog
                     className='view'

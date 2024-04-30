@@ -70,11 +70,11 @@
     }
 
     &__allCardsWrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        // display: grid;
+        // grid-template-columns: repeat(3, 1fr);
+        // gap: 24px;
         // padding: 0px 35px;
-        justify-content: center;
+        // justify-content: center;
     }
 
     &__img {
@@ -128,7 +128,7 @@
         gap: 11.13px;
         position: absolute;
         top: 86px;
-        left: 130px;
+        // left: 130px;
         display: none;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -153,6 +153,9 @@
 
             .section__cardAction {
                 display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
             }
 
             .menus__info {
@@ -164,7 +167,7 @@
     &__cardContent {
         display: flex;
         flex-direction: column;
-        width: 353px;
+        width: 100%;
         // height: 104px;
         // margin: 0px;
         border-radius: 24px;
@@ -195,7 +198,7 @@
     }
 
     &__cardDescription {
-        width: 301px;
+        width: 100%;
         height: 34px;
         font-family: "Montserrat";
         font-size: 14px;
@@ -224,9 +227,10 @@
         position: relative;
     }
 
-    .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
-        overflow-y:visible;
+    .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+        overflow-y: visible;
     }
+
     .close:hover {
         background-color: black;
     }
@@ -262,22 +266,50 @@
         width: 378px;
     }
 
-    &__contentWrapper{
+    &__contentWrapper {
         display: flex;
         flex-direction: column;
         gap: 11px;
     }
 
-    &__content{
+    &__content {
         display: flex;
         flex-direction: column;
         gap: 2px;
     }
 }
 
-// .rt-BaseDialogScroll{
-//     overflow-y: scroll;
-//     &::-webkit-scrollbar {
-//         display: none;
-//     }
-// }
+.css-129ydy1-MuiGrid2-root {
+    margin: auto !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .section {
+        &__bottomWrapper {
+            padding: 19px 7px !important;
+        }
+    }
+
+    .view .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+        width: 310px !important;
+    }
+
+    .view__desc {
+        width: 100%;
+    }
+
+    .createSectionContainer {
+        width: 300px !important;
+    }
+
+    .createSectionLabel {
+        width: 270px !important;
+
+        .rt-TextFieldRoot {
+            width: 270px !important;
+        }
+        :where(.css-dev-only-do-not-override-1kuana8).ant-select{
+            width: 270px !important;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+import './style.scss'
 import Avatar from '@mui/material/Avatar';
 import close from "../../../images/close (1).png"
 import img from "../../../images/createMenuImg.png"
@@ -99,8 +100,8 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                 value={name}
                             />
                         </label>
-                        <label style={{ width: "352px", height: "72px" }}>
-                            <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
+                        <label style={{ width: "352px", height: "72px" }} className='createMenuLabel'>
+                            <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" >
                                 Description
                             </Text>
                             <TextField.Root

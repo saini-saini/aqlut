@@ -2,6 +2,7 @@ import "./section.scss"
 import ViewItem from './view';
 import info from "../../../images/info.png";
 import CreateSection from './createSection';
+import Grid from '@mui/material/Unstable_Grid2';
 import cardImg from "../../../images/image 1.png"
 import { Select } from 'antd';
 import React, { useState } from 'react'
@@ -118,154 +119,44 @@ const Section = () => {
         />
 
 
-        <div className='section__allCardsWrapper'>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
+        <Grid container className='section__allCardsWrapper' spacing={4} >
+          {
+            Array.from({ length: 5 }).map((_, index) => (
+              <Grid item  xs={12} sm={6} md={4} lg={4} xl={2.4} key={index}>
+              <div className='section__cardWrapper'>
+              <div className='section__imgWrapper'>
+                <img src={cardImg} alt="" className='section__img' />
+              </div>
+              <div className='section__cardContent'>
+                <div className='section__cardHeading'>
+                  <p className='section__cardTitle'>New Year Menu</p>
+                  <div>
+                    <FormControlLabel
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      className='profile__switch'
+                    />
+                  </div>
+                </div>
+                <div className='section__cardDescriptionWrapper'>
+                  <p className='section__cardDescription'>
+                    Lorem Ipsum is simply dummy text of  the
+                    printing and typesetting industry.
+                  </p>
                 </div>
               </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
+              <div className='section__cardAction'>
+                <button className='section__deleteButton'>Delete</button>
+                <button className='section__editButton'>Edit</button>
+              </div>
+              <div className='menus__info'>
+                <img src={info} alt="info" onClick={openViewSectionDialog} />
               </div>
             </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info'>
-              <img src={info} alt="info" onClick={openViewSectionDialog} />
-            </div>
-          </div>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
-                </div>
-              </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info' >
-              <img src={info} alt="info" onClick={openViewSectionDialog} />
-            </div>
-          </div>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
-                </div>
-              </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info'>
-              <img src={info} alt="info" onClick={openViewSectionDialog} />
-            </div>
-          </div>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
-                </div>
-              </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info'>
-              <img src={info} alt="info" onClick={openViewSectionDialog} />
-            </div>
-          </div>
-          <div className='section__cardWrapper'>
-            <div className='section__imgWrapper'>
-              <img src={cardImg} alt="" className='section__img' />
-            </div>
-            <div className='section__cardContent'>
-              <div className='section__cardHeading'>
-                <p className='section__cardTitle'>New Year Menu</p>
-                <div>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                    className='profile__switch'
-                  />
-                </div>
-              </div>
-              <div className='section__cardDescriptionWrapper'>
-                <p className='section__cardDescription'>
-                  Lorem Ipsum is simply dummy text of  the
-                  printing and typesetting industry.
-                </p>
-              </div>
-            </div>
-            <div className='section__cardAction'>
-              <button className='section__deleteButton'>Delete</button>
-              <button className='section__editButton'>Edit</button>
-            </div>
-            <div className='menus__info' onClick={openViewSectionDialog}>
-              <img src={info} alt="info" onClick={openViewSectionDialog} />
-            </div>
-          </div>
+            </Grid>
+            ))
+          }
 
-        </div>
+        </Grid>
         {createSectionOpen && <CreateSection open={createSectionOpen} setOpen={setCreateSectionOpen} onClose={closeCreateSectionDialog} />}
         {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
 

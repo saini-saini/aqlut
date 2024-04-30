@@ -211,42 +211,46 @@ const SectionItems = () => {
           maxHeight: '442px', boxShadow: "0px 2px 8px 0px #3D6BC047", backgroundColor: "white", borderRadius: "10px"
         }}>
 
-          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }}>
-            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} />
-            <button style={{
-              width: "120px",
-              height: "42px",
-              borderRadius: "10px",
-              border: "none",
-              backgroundColor: "white",
-              boxShadow: " 0px 2px 8px 0px #00000047",
-            }}
-              onClick={showDrawer}>
-              <div style={{ display: "flex", gap: "5px", justifyContent: "center", alignItems: "center" }}>
-                <img src={filterIcon} alt="" style={{ width: "20px", height: "20px" }} /><span style={{ color: "#A1A1A1", fontFamily: "Montserrat", fontSize: "14px", fontWeight: "600", lineHeight: "17.07px", textAlign: "left" }}>Filter</span>
-              </div>
-            </button>
+          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }} className="sectionItem__tableTop">
+            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} className="sectionItem__search" />
+            <div style={{ display: "flex", gap: "10px" }} className="sectionItem__filter">
+              <button style={{
+                width: "120px",
+                height: "42px",
+                borderRadius: "10px",
+                border: "none",
+                backgroundColor: "white",
+                boxShadow: " 0px 2px 8px 0px #00000047",
+              }}
+                onClick={showDrawer}>
+                <div style={{ display: "flex", gap: "5px", justifyContent: "center", alignItems: "center" }}>
+                  <img src={filterIcon} alt="" style={{ width: "20px", height: "20px" }} /><span style={{ color: "#A1A1A1", fontFamily: "Montserrat", fontSize: "14px", fontWeight: "600", lineHeight: "17.07px", textAlign: "left" }}>Filter</span>
+                </div>
+              </button>
 
-            <Upload
-              name="avatar"
-              className="avatar-uploader"
-              showUploadList={false}
-              action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-              beforeUpload={beforeUpload}
-              onChange={UploadHandleChange}
-            >
-              {imageUrl ? (
-                <img
-                  src={imageUrl}
-                  alt="avatar"
-                  style={{
-                    width: '100%',
-                  }}
-                />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
+              <div className="sectionItem__upload">
+                <Upload
+                  name="avatar"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                  beforeUpload={beforeUpload}
+                  onChange={UploadHandleChange}
+                >
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="avatar"
+                      style={{
+                        width: '100%',
+                      }}
+                    />
+                  ) : (
+                    uploadButton
+                  )}
+                </Upload>
+              </div>
+            </div>
           </div>
           <Table
             columns={columns}

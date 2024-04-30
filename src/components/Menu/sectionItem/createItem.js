@@ -27,7 +27,7 @@ const CreateItem = () => {
             <div className='createItem__bottomWrapper'>
                 <div className='createItem__bottomContent'>
 
-                    <div style={{ display: "flex", gap: "25px", alignItems: "center", paddingBottom: "35px" }}>
+                    <div style={{ display: "flex", gap: "25px", alignItems: "center", paddingBottom: "35px" }} className="createItem__bottomContentData">
                         <div className='createItem__image'>
                             {selectedImage ? (
                                 <Avatar
@@ -77,7 +77,7 @@ const CreateItem = () => {
 
                             <Form className='createItem__form'>
 
-                                <div style={{ display: "flex", gap: "99px" }}>
+                                <div style={{ display: "flex", gap: "77px" }} className="createItem__formContent">
 
                                     <div className='createItem__formLeft'>
                                         <div className='createItem__inputWrapper'>
@@ -112,7 +112,7 @@ const CreateItem = () => {
                                     <div className='createItem__formRight'>
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Sections</label>
-                                            <Field name="color" as="select">
+                                            <Field name="color" as="select" className='customSelect'>
                                                 <option value="red">Cake</option>
                                                 <option value="green">Green</option>
                                                 <option value="blue">Blue</option>
@@ -122,7 +122,9 @@ const CreateItem = () => {
 
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Price</label>
-                                            <div style={{
+                                            <div 
+                                            className="createItem__priceWrapper"
+                                            style={{
                                                 width: "437px",
                                                 height: '319pxpx',
                                                 border: "1px solid #F0F1F7",
@@ -132,7 +134,9 @@ const CreateItem = () => {
                                                 padding: "7px",
                                                 borderRadius: "7px"
                                             }}>
-                                                <div style={{
+                                                <div 
+                                                className="createItem__priceContent"
+                                                style={{
                                                     width: "422px",
                                                     height: "70px",
                                                     border: "1px solid #F0F1F7",
@@ -160,7 +164,9 @@ const CreateItem = () => {
 
                                                 </div>
 
-                                                <div style={{
+                                                <div 
+                                                 className="createItem__priceContent"
+                                                style={{
                                                     width: "422px",
                                                     height: "70px",
                                                     border: "1px solid #F0F1F7",
@@ -202,6 +208,7 @@ const CreateItem = () => {
                                                     width: '437px',
                                                     // height: '64px',
                                                 }}
+                                                className='customSelect'
                                                 options={filteredOptions.map((item) => ({
                                                     value: item,
                                                     label: item,

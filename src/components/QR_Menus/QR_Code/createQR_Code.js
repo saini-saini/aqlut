@@ -1,3 +1,4 @@
+import "./qr.scss"
 import React from 'react';
 import QRCODE from "../../../images/QR code.png";
 import close from "../../../images/close (1).png"
@@ -20,12 +21,12 @@ const CreateQRCode = ({ open, setOpen, onClose }) => {
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
-                <Dialog.Content style={{ padding: "30px 26px 17px 26px", width: '413px', height: "544px", borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: " 0px 10px 30px 0px #00000040", position: "relative" }}>
+                <Dialog.Content style={{ padding: "30px 26px 17px 26px", width: '413px', height: "544px", borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: " 0px 10px 30px 0px #00000040", position: "relative" }} className='createQRContainer'>
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create QR Code</Dialog.Title>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
 
-                        <label style={{ width: "353px", height: "72px" }}>
+                        <label style={{ width: "353px", height: "72px" }} className='createQRLabel'>
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 QR Code Name
                             </Text>
@@ -44,7 +45,9 @@ const CreateQRCode = ({ open, setOpen, onClose }) => {
                         <div className='createItem__inputWrapper'>
                             <label className='createItem__label'>Menus</label>
                             <Select.Root value={value} onValueChange={setValue}>
-                                <Select.Trigger style={{
+                                <Select.Trigger
+                                className="createQRselect"
+                                style={{
                                     width: "352px",
                                     height: "42px",
                                     borderRadius: "10px",

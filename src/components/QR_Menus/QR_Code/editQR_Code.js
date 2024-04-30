@@ -1,3 +1,4 @@
+import "./qr.scss"
 import React from 'react';
 import { Link } from 'react-router-dom';
 import QRCODE from "../../../images/QR code.png"
@@ -20,12 +21,12 @@ const EditQRCode = ({ open, setOpen, onClose }) => {
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
-                <Dialog.Content style={{ padding: "30px 26px 17px 26px", width: '413px', height: "544px", borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: " 0px 10px 30px 0px #00000040", position: "relative" }}>
+                <Dialog.Content style={{ padding: "30px 26px 17px 26px", width: '413px', height: "544px", borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxShadow: " 0px 10px 30px 0px #00000040", position: "relative" }} className='editQRContainer'>
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Edit QR Code</Dialog.Title>
 
                     <Flex style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", gap: "20px" }}>
 
-                        <label style={{ width: "353px", height: "72px" }}>
+                        <label style={{ width: "353px", height: "72px" }} className='editQRLabel' >
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 QR Code Name
                             </Text>
@@ -42,9 +43,11 @@ const EditQRCode = ({ open, setOpen, onClose }) => {
                         </label>
 
                         <div className='createItem__inputWrapper'>
-                            <label className='createItem__label'>Menus</label>
+                            <label className='editQRLabel'>Menus</label>
                             <Select.Root value={value} onValueChange={setValue}>
-                                <Select.Trigger style={{
+                                <Select.Trigger 
+                                 className="editQRselect"
+                                style={{
                                     width: "352px",
                                     height: "42px",
                                     borderRadius: "10px",

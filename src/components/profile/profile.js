@@ -115,8 +115,6 @@ const Profile = () => {
     document.getElementById('imageInput').value = '';
   };
 
-
-
   return (
     <div className='profile'>
       <div className='profile__topWrapper'>
@@ -125,7 +123,6 @@ const Profile = () => {
       </div>
 
       <div className='profile__centerBottom'>
-
         <div className='profile__centerWrapper'>
           <div className='profile__centerLeft'>
             <div className='profile__logoImgWrapper'>
@@ -229,7 +226,6 @@ const Profile = () => {
                     <Field as="textarea" resize="none" name="restaurantBio" placeholder="Enter restaurant bio" autoComplete="off" className='profile__restaurantBioInput' />
                     <ErrorMessage name="restaurantBio" component={""} className='profile__error' />
                   </div>
-
                 </div>
 
                 <div className='profile__formRight'>

@@ -167,13 +167,13 @@ const QRMenuGroup = () => {
       </div>
 
       <div className='QRMenuGroup__bottomWrapper'>
-        <div style={{
+        <div className='QRMenuGroup__bottom' style={{
           maxHeight: '438px', overflowY: 'auto', boxShadow: "0px 2px 8px 0px #3D6BC047", backgroundColor: "white", borderRadius: "10px"
         }}>
 
-          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }}>
-            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} />
-
+          <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "13px", padding: "15px 17px 12px 27px" }} className="QRMenuGroup__tableTop">
+            <Input prefix={<img src={searchIcon} alt="" style={{ width: "12px", height: "12px" }} />} placeholder="Search" style={{ width: "281px", height: "42px", backgroundColor: "#FFFFFF", boxShadow: "0px 2px 8px 0px #00000047" }} className="QRMenuGroup__search"/>
+            <div style={{ display: "flex", gap: "10px" }} className="QRMenuGroup__filter">
             <button style={{
               width: "120px",
               height: "42px",
@@ -187,7 +187,7 @@ const QRMenuGroup = () => {
               </div>
             </button>
 
-
+            <div className="QRMenuGroup__upload">
             <Upload
               name="avatar"
               className="avatar-uploader"
@@ -209,9 +209,12 @@ const QRMenuGroup = () => {
               )}
             </Upload>
           </div>
+          </div>
+            </div>
           <Table
             columns={columns}
             dataSource={data}
+            className='QRMenuGroup__table'
             size='small'
             scroll={{
               y: 240,
