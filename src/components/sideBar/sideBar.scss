@@ -20,7 +20,6 @@
         transform: translateX(0);
     }
 
-
     &__normalli {
         display: flex;
         align-items: center;
@@ -33,11 +32,6 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 17.7px;
-
-        // &:hover {
-        //     background-color: #E9E9E9;
-        // }
-
         span {
             width: 100%;
         }
@@ -62,9 +56,6 @@
         gap: 10px;
         color: #000000;
 
-        // &:hover {
-        //     background-color: #E9E9E9;
-        // }
         span {
             width: 100%;
         }
@@ -85,7 +76,6 @@
         color: #F55A2C
     }
 }
-
 
 .css-15v22id-MuiAccordionDetails-root {
     padding: 0px 16px 16px;
@@ -111,7 +101,7 @@
     }
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1024px){
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
     .sidebar {
         transform: translateX(-100%);
         position: fixed;

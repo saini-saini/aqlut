@@ -332,10 +332,10 @@
             flex-direction: column !important;
         }
 
-        &__bottomWrapper{
+        &__bottomWrapper {
             padding: 19px 20px 0px 20px !important;
         }
-        
+
         &__bottom {
             max-height: 500px !important;
         }
@@ -358,8 +358,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -367,8 +367,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -376,8 +376,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -385,8 +385,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -394,18 +394,19 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table-pagination-right {
-            gap: 20px;
+            gap: 10px;
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-item {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
         }
     }
 
     .createQRContainer {
         width: 300px !important;
     }
+
     .createQRLabel {
         width: 270px !important;
 
@@ -414,6 +415,7 @@
         }
 
     }
+
     .createQRselect {
         width: 270px !important;
     }
@@ -421,6 +423,7 @@
     .editQRContainer {
         width: 300px !important;
     }
+
     .editQRLabel {
         width: 270px !important;
 
@@ -429,6 +432,7 @@
         }
 
     }
+
     .editQRselect {
         width: 270px !important;
     }
@@ -445,8 +449,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -454,8 +458,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-prev {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -463,8 +467,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -472,8 +476,8 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-next {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
             line-height: 16px;
             display: flex;
             justify-content: center;
@@ -481,12 +485,12 @@
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table-pagination-right {
-            gap: 20px;
+            gap: 10px;
         }
 
         :where(.css-dev-only-do-not-override-1kuana8).ant-pagination.ant-pagination-mini .ant-pagination-item {
-            width: 16px;
-            height: 16px;
+            width: 24px;
+            height: 24px;
         }
     }
 }
@@ -496,7 +500,6 @@
         &__table {
             padding: 0px 20px 11px 20px !important;
         }
-
         :where(.css-dev-only-do-not-override-1kuana8).ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody>tr>td {
             overflow: scroll;
         }
