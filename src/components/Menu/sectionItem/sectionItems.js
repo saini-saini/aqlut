@@ -1,6 +1,7 @@
 import "./sectionItem.scss"
 import Avatar from '@mui/material/Avatar';
 import BrushIcon from '@mui/icons-material/Brush';
+import CloseIcon from '@mui/icons-material/Close';
 import exportIcon from "../../../images/export.png"
 import filterIcon from "../../../images/filter.png"
 import filter from "../../../images/filter (1).png"
@@ -274,8 +275,14 @@ const SectionItems = () => {
 
       <Drawer
         title={
-          <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-            <img src={filter} alt="" style={{ width: "20px", height: "20px" }} /><span style={{ color: "black", fontFamily: "Montserrat", fontWeight: "600", lineHeight: "17.07px", textAlign: "left", fontSize: "12px", display: 'flex', gap: "2px" }}>Filter <div style={{ color: "white", backgroundColor: "#F23D3D", width: '16px', height: '16px', borderRadius: '50%', textAlign: "center", padding: "0px 5px 0px 5px" }}>3</div></span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+              <img src={filter} alt="" style={{ width: "20px", height: "20px" }} /><span style={{ color: "black", fontFamily: "Montserrat", fontWeight: "600", lineHeight: "17.07px", textAlign: "left", fontSize: "12px", display: 'flex', gap: "2px" }}>Filter <div style={{ color: "white", backgroundColor: "#F23D3D", width: '16px', height: '16px', borderRadius: '50%', textAlign: "center", padding: "0px 5px 0px 5px" }}>3</div></span>
+            </div>
+
+            <div style={{ cursor: "pointer" }}>
+              <CloseIcon onClick={onClose} />
+            </div>
           </div>
         }
         placement={placement}

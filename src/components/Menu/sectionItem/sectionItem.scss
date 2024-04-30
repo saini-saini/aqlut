@@ -537,9 +537,9 @@ Table {
     border: 1px solid #d9d9d9 !important;
 }
 
-
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .sectionItem {
+
         &__tableTop {
             display: flex !important;
             flex-direction: column !important;
@@ -555,18 +555,14 @@ Table {
 
         &__filter {
             width: 100%;
-
+            justify-content: space-evenly !important;
         }
-    }
-}
 
-@media only screen and (min-width: 320px) and (max-width: 480px) {
-    .sectionItem {
         &__table {
             padding: 0px 20px 11px 20px !important;
         }
 
-        &__bottomWrapper{
+        &__bottomWrapper {
             padding: 19px 20px 0px 20px !important;
         }
 
@@ -620,43 +616,45 @@ Table {
         }
     }
 
-    .createItem{
+    .createItem {
         padding: 44px 27px 0px 27px !important;
 
-        &__formContent{
+        &__formContent {
             flex-direction: column;
             gap: 30px !important;
         }
 
-        &__inputWrapper{
-            width: 100% !important;
-        }
-        &__input{
+        &__inputWrapper {
             width: 100% !important;
         }
 
-        &__bottomWrapper{
+        &__input {
+            width: 100% !important;
+        }
+
+        &__bottomWrapper {
             padding: 43px 50px 0px 50px !important;
         }
 
-        &__priceWrapper{
+        &__priceWrapper {
             width: 100% !important;
         }
 
-        &__priceContent{
+        &__priceContent {
             width: 100% !important;
             overflow-y: scroll !important;
- 
+
             &::-webkit-scrollbar {
                 display: none;
             }
         }
 
-        &__bottomContentData{
+        &__bottomContentData {
             flex-direction: column !important;
         }
     }
-    .customSelect{
+
+    .customSelect {
         width: 100% !important;
     }
 
@@ -719,44 +717,46 @@ Table {
     }
 
 
-    .createItem{
-        &__formContent{
+    .createItem {
+        &__formContent {
             flex-direction: column;
         }
 
-        &__inputWrapper{
-            width: 100% !important;
-        }
-        &__input{
+        &__inputWrapper {
             width: 100% !important;
         }
 
-        &__bottomWrapper{
+        &__input {
+            width: 100% !important;
+        }
+
+        &__bottomWrapper {
             padding: 43px 50px 0px 50px !important;
         }
 
-        &__priceWrapper{
+        &__priceWrapper {
             width: 100% !important;
         }
 
-        &__priceContent{
+        &__priceContent {
             width: 100% !important;
             overflow-y: scroll !important;
- 
+
             &::-webkit-scrollbar {
                 display: none;
             }
         }
     }
-    .customSelect{
+
+    .customSelect {
         width: 100% !important;
     }
 
-    .ant-select-show-search:where(.css-dev-only-do-not-override-1kuana8).ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    .ant-select-show-search:where(.css-dev-only-do-not-override-1kuana8).ant-select:not(.ant-select-customize-input) .ant-select-selector {
         width: 100% !important;
     }
 
-   
+
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {

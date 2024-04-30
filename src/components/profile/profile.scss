@@ -464,10 +464,11 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-nxo287-MuiInputBase-inpu
         }
 
         &__dayTime {
-            flex-direction: column !important;
+            flex-direction: row !important;
             gap: 7px !important;
             width: 100% !important;
-            align-items: flex-start !important;
+            align-items: center;
+            overflow-x: scroll;
         }
 
         &__centerBottom {
