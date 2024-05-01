@@ -164,7 +164,6 @@
         border-radius: 8px;
     }
 
-
     &__input:focus {
         box-shadow: 0px 2px 8px 0px #F55A2C;
     }
@@ -552,11 +551,12 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-nxo287-MuiInputBase-inpu
 }
 
 //small screens and laptops
-@media only screen and (min-width: 769px) and (max-width: 1024px){
-    .profile{
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .profile {
         &__formWrapper {
             flex-direction: column;
         }
+
         &__day {
             flex-direction: column !important;
             gap: 0px !important;
@@ -577,6 +577,16 @@ label[data-shrink=false]+.MuiInputBase-formControl .css-nxo287-MuiInputBase-inpu
 }
 
 //Desktops and large screens
-@media only screen and (min-width: 1025px) and (max-width: 1200px){
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {}
 
+
+.changePassword{
+    &__input{
+        position: relative;
+    }
+
+    &__eyeicon{
+        position: absolute;
+        right: 45px;
+    }
 }

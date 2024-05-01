@@ -1,12 +1,20 @@
 import "./auth.scss"
 import ForgetPassword from './forgetPassword';
-import React, { useState } from 'react'
 import TextError from '../../formValidation/error';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { LoginValidation } from '../../formValidation/formValidation';
-
 const Login = () => {
     const [forgetPasswordOpen, setForgetPasswordOpen] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(prevState => !prevState);
+    };
 
     const openForgetPasswordDialog = () => {
         setForgetPasswordOpen(true);
@@ -35,13 +43,16 @@ const Login = () => {
                             </div>
                             <div className='loginForm__inputWrapper'>
                                 <label className='loginForm__label'>Password</label>
-                                <Field type="text" name="password" placeholder="Password" autoComplete="off" className='loginForm__input' />
-                                {/* <RoomIcon color='warning' className='loginForm__locationIcon'/> */}
+                                <Field type={showPassword ? "text" : "password"} name="password" placeholder="Password" autoComplete="off" className='loginForm__input' />
                                 <ErrorMessage name="password" component={TextError} className='loginForm__error' />
+                                <div className="loginForm__eyeicon" onClick={togglePasswordVisibility}>
+                                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                </div>
                                 <p className='loginForm__forgotTxt' onClick={openForgetPasswordDialog}>Forgot Password?</p>
+
                             </div>
                             <div className='loginForm__btnWrapper'>
-                                <button type="submit" className='loginForm__button'>SIGN IN</button>
+                                <button type="submit" className='loginForm__button' onClick={() => navigate("/home")}>SIGN IN</button>
                                 <p className='loginForm__contactUsText'>Don't have an account? <a href="#" style={{ textDecoration: "none" }}><span style={{ color: "#F55A2C" }}>Contact Us</span></a></p>
                             </div>
                         </div>
