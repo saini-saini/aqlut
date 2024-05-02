@@ -23,10 +23,8 @@ const CreateItem = () => {
                 <span className='createItem__title'>Create Items</span>
             </div>
 
-
             <div className='createItem__bottomWrapper'>
                 <div className='createItem__bottomContent'>
-
                     <div style={{ display: "flex", gap: "25px", alignItems: "center", paddingBottom: "35px" }} className="createItem__bottomContentData">
                         <div className='createItem__image'>
                             {selectedImage ? (
@@ -73,11 +71,13 @@ const CreateItem = () => {
                     </div>
 
                     <div className='createItem__formWrapper'>
-                        <Formik>
+                        <Formik 
+                        initialValues={{ name: '', menus: '', orderId: '',description:'', section:'',priceName:'', price:'',calories:''}}
+                        onSubmit={values => console.log(values)}>
 
                             <Form className='createItem__form'>
 
-                                <div style={{ display: "flex", gap: "77px" }} className="createItem__formContent">
+                                <div style={{ display: "flex", gap: "56px", padding: "10px" }} className="createItem__formContent">
 
                                     <div className='createItem__formLeft'>
                                         <div className='createItem__inputWrapper'>
@@ -88,12 +88,12 @@ const CreateItem = () => {
 
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Menus</label>
-                                            <Field name="color" as="select" className='customSelect'>
+                                            <Field name="menus" as="select" className='customSelect'>
                                                 <option value="red" className="option-red">Red</option>
                                                 <option value="green">Green</option>
                                                 <option value="blue">Blue</option>
                                             </Field>
-                                            <ErrorMessage name="name" component={""} className='createItem__error' />
+                                            <ErrorMessage name="menus" component={""} className='createItem__error' />
                                         </div>
 
                                         <div className='createItem__inputWrapper'>
@@ -104,7 +104,7 @@ const CreateItem = () => {
 
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Description</label>
-                                            <Field type="text" name="description" placeholder="Enter description" autoComplete="off" className='createItem__input' />
+                                            <Field as='textarea' type="text" name="description" placeholder="Enter description" autoComplete="off" className='createItem__textarea' />
                                             <ErrorMessage name="description" component={""} className='createItem__error' />
                                         </div>
                                     </div>
@@ -112,40 +112,70 @@ const CreateItem = () => {
                                     <div className='createItem__formRight'>
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Sections</label>
-                                            <Field name="color" as="select" className='customSelect'>
+                                            <Field name="section" as="select" className='customSelect'>
                                                 <option value="red">Cake</option>
                                                 <option value="green">Green</option>
                                                 <option value="blue">Blue</option>
                                             </Field>
-                                            <ErrorMessage name="name" component={""} className='createItem__error' />
+                                            <ErrorMessage name="section" component={""} className='createItem__error' />
                                         </div>
 
                                         <div className='createItem__inputWrapper'>
                                             <label className='createItem__label'>Price</label>
-                                            <div 
-                                            className="createItem__priceWrapper"
-                                            style={{
-                                                width: "437px",
-                                                height: '319pxpx',
-                                                border: "1px solid #F0F1F7",
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                gap: "4px",
-                                                padding: "7px",
-                                                borderRadius: "7px"
-                                            }}>
-                                                <div 
-                                                className="createItem__priceContent"
+                                            <div
+                                                className="createItem__priceWrapper"
                                                 style={{
-                                                    width: "422px",
-                                                    height: "70px",
+                                                    width: "437px",
+                                                    height: '319pxpx',
                                                     border: "1px solid #F0F1F7",
                                                     display: "flex",
-                                                    gap: "20px",
+                                                    flexDirection: "column",
+                                                    gap: "4px",
                                                     padding: "7px",
                                                     borderRadius: "7px"
-
                                                 }}>
+                                                <div
+                                                    className="createItem__priceContent"
+                                                    style={{
+                                                        width: "422px",
+                                                        height: "70px",
+                                                        border: "1px solid #F0F1F7",
+                                                        display: "flex",
+                                                        gap: "20px",
+                                                        padding: "7px",
+                                                        borderRadius: "7px"
+
+                                                    }}>
+                                                    <div className='createItem__inputWrapper'>
+                                                        <label className='createItem__priceLabel'>Name</label>
+                                                        <Field type="text" name="priceName" placeholder="Enter name" autoComplete="off" className='createItem__priceiInput' />
+                                                        <ErrorMessage name="priceName" component={""} className='createItem__error' />
+                                                    </div>
+                                                    <div className='createItem__inputWrapper'>
+                                                        <label className='createItem__priceLabel'>Price</label>
+                                                        <Field type="text" name="price" placeholder="Enter price" autoComplete="off" className='createItem__priceiInput' />
+                                                        <ErrorMessage name="price" component={""} className='createItem__error' />
+                                                    </div>
+                                                    <div className='createItem__inputWrapper'>
+                                                        <label className='createItem__priceLabel'>Calories</label>
+                                                        <Field type="text" name="calories" placeholder="Enter calories" autoComplete="off" className='createItem__priceiInput' />
+                                                        <ErrorMessage name="calories" component={""} className='createItem__error' />
+                                                    </div>
+
+                                                </div>
+
+                                                {/* <div
+                                                    className="createItem__priceContent"
+                                                    style={{
+                                                        width: "422px",
+                                                        height: "70px",
+                                                        border: "1px solid #F0F1F7",
+                                                        display: "flex",
+                                                        gap: "20px",
+                                                        padding: "7px",
+                                                        borderRadius: "7px"
+
+                                                    }}>
                                                     <div className='createItem__inputWrapper'>
                                                         <label className='createItem__priceLabel'>Name</label>
                                                         <Field type="text" name="name" placeholder="Enter name" autoComplete="off" className='createItem__priceiInput' />
@@ -162,37 +192,7 @@ const CreateItem = () => {
                                                         <ErrorMessage name="calories" component={""} className='createItem__error' />
                                                     </div>
 
-                                                </div>
-
-                                                <div 
-                                                 className="createItem__priceContent"
-                                                style={{
-                                                    width: "422px",
-                                                    height: "70px",
-                                                    border: "1px solid #F0F1F7",
-                                                    display: "flex",
-                                                    gap: "20px",
-                                                    padding: "7px",
-                                                    borderRadius: "7px"
-
-                                                }}>
-                                                    <div className='createItem__inputWrapper'>
-                                                        <label className='createItem__priceLabel'>Name</label>
-                                                        <Field type="text" name="name" placeholder="Enter name" autoComplete="off" className='createItem__priceiInput' />
-                                                        <ErrorMessage name="name" component={""} className='createItem__error' />
-                                                    </div>
-                                                    <div className='createItem__inputWrapper'>
-                                                        <label className='createItem__priceLabel'>Price</label>
-                                                        <Field type="text" name="price" placeholder="Enter price" autoComplete="off" className='createItem__priceiInput' />
-                                                        <ErrorMessage name="price" component={""} className='createItem__error' />
-                                                    </div>
-                                                    <div className='createItem__inputWrapper'>
-                                                        <label className='createItem__priceLabel'>Calories</label>
-                                                        <Field type="text" name="calories" placeholder="Enter calories" autoComplete="off" className='createItem__priceiInput' />
-                                                        <ErrorMessage name="calories" component={""} className='createItem__error' />
-                                                    </div>
-
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
 

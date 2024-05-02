@@ -2,7 +2,7 @@ import Avatar from '@mui/material/Avatar';
 import close from "../../../images/close (1).png"
 import img from "../../../images/createMenuImg.png"
 import React, { useState } from 'react';
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
+import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 const EditMenu = ({ open, setOpen, onClose }) => {
 
     const [name, setName] = useState("");
@@ -102,7 +102,7 @@ const EditMenu = ({ open, setOpen, onClose }) => {
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Description
                             </Text>
-                            <TextField.Root
+                            <TextArea
                                 style={{
                                     width: "352px",
                                     height: "48px",
@@ -114,8 +114,6 @@ const EditMenu = ({ open, setOpen, onClose }) => {
                                 placeholder="enter description"
                                 onChange={(e) => setDescription(e.target.value)}
                                 value={description}
-                                multiline={true}
-                                rows={4}
                             />
                         </label>
 
@@ -139,7 +137,7 @@ const EditMenu = ({ open, setOpen, onClose }) => {
                                     fontSize: "14px",
                                     lineHeight: "17.7px",
                                     textTransform: "uppercase",
-                                    marginTop: "22px",
+                                    marginTop: "48px",
                                     cursor: "pointer",
                                     fontFamily: "Montserrat",
                                     boxShadow: "0px 2px 16px 0px #3D6BC040"

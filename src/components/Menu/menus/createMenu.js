@@ -4,7 +4,7 @@ import close from "../../../images/close (1).png"
 import img from "../../../images/createMenuImg.png"
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
+import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 import { CreateMenuValidation } from '../../../formValidation/formValidation';
 const CreateMenu = ({ open, setOpen, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -35,7 +35,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
     });
 
     return (
-        <div>
+        <div className='createMenu'>
             <Dialog.Root open={open} onClose={onClose} >
                 <Dialog.Content style={{ width: '413px', height: '499px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }} className='createMenuContainer'>
                     <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create Menu</Dialog.Title>
@@ -72,7 +72,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                         border: "1px solid #F0F1F7",
                                         padding: "13px 20px"
                                     }}
-                                    className='createMenuInput'
+                                    className='createMenu__input'
                                     placeholder="enter name"
                                     id="name"
                                     name="name"
@@ -80,20 +80,20 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
-                                {formik.touched.name && formik.errors.name && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.name}</Text>}
+                                {formik.touched.name && formik.errors.name && <Text as="div" size="2" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red" >{formik.errors.name}</Text>}
                             </label>
                             <label style={{ width: "352px", height: "72px" }} className='createMenuLabel'>
                                 <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" >
                                     Description
                                 </Text>
-                                <TextField.Root
+                                <TextArea
                                     style={{
                                         width: "352px",
                                         height: "48px",
                                         borderRadius: "8px",
-                                        outlineColor: "#F55A2C",
+                                        outline: "none",
                                         border: "1px solid #F0F1F7",
-                                        padding: "13px 20px"
+                                        padding: "13px 20px",
                                     }}
                                     placeholder="enter description"
                                     id="description"
@@ -101,8 +101,6 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                     value={formik.values.description}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    multiline={true}
-                                    rows={4}
                                 />
                                 {formik.touched.description && formik.errors.description && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.description}</Text>}
                             </label>
@@ -127,7 +125,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                         fontSize: "14px",
                                         lineHeight: "17.7px",
                                         textTransform: "uppercase",
-                                        marginTop: "22px",
+                                        marginTop: "48px",
                                         cursor: "pointer",
                                         fontFamily: "Montserrat",
                                         boxShadow: "0px 2px 16px 0px #3D6BC040"

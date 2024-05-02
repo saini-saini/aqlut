@@ -121,11 +121,7 @@
     }
 
     &__allCardsWrapper {
-        // display: grid;
-        // grid-template-columns: repeat(3, 1fr);
-        // gap: 37px;
-        padding: 0px 35px;
-        // justify-content: center;
+        padding: 0px 20px;
         width: 100%;
     }
 
@@ -199,6 +195,9 @@
 }
 
 
+
+
+
 // //Mobile devices
 @media only screen and (min-width: 320px) and (max-width: 480px) {
     .menus {
@@ -235,3 +234,5 @@
         }
     }
 }
+
+

@@ -4,7 +4,7 @@ import close from "../../../images/close (1).png"
 import img from "../../../images/createMenuImg.png"
 import { Select } from 'antd';
 import React, { useState } from 'react';
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
+import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 
 const CreateSection = ({ open, setOpen, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -142,7 +142,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                             <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
                                 Description
                             </Text>
-                            <TextField.Root
+                            <TextArea
                                 style={{
                                     width: "352px",
                                     height: "102px",
@@ -152,8 +152,6 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                     padding: "13px 20px"
                                 }}
                                 placeholder="enter description"
-                                multiline={true}
-                                rows={4}
                             />
                         </label>
 

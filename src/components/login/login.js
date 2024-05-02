@@ -4,9 +4,11 @@ import TextError from '../../formValidation/error';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react'
+import { loginApi } from "../../api/login";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { LoginValidation } from '../../formValidation/formValidation';
+
 const Login = () => {
     const [forgetPasswordOpen, setForgetPasswordOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -22,14 +24,28 @@ const Login = () => {
 
     const closeForgetPasswordDialog = () => {
         setForgetPasswordOpen(false);
-    };
+    }
 
+    const handlesubmit = async (values) => {
+        try {
+            console.log(values)
+            const response = await loginApi({
+                email: values.email,
+                password: values.password
+            });
+            console.log(response.data);
+            navigate('/home');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
     return (
         <div className='loginForm'>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={LoginValidation}
-                onSubmit={values => console.log(values)}>
+                onSubmit={handlesubmit}>
                 <Form className='loginForm__content'>
                     <div className='loginForm__wrapper'>
                         <div className='loginForm__font'>
@@ -52,7 +68,7 @@ const Login = () => {
 
                             </div>
                             <div className='loginForm__btnWrapper'>
-                                <button type="submit" className='loginForm__button' onClick={() => navigate("/home")}>SIGN IN</button>
+                                <button type="submit" className='loginForm__button'>SIGN IN</button>
                                 <p className='loginForm__contactUsText'>Don't have an account? <a href="#" style={{ textDecoration: "none" }}><span style={{ color: "#F55A2C" }}>Contact Us</span></a></p>
                             </div>
                         </div>
