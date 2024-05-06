@@ -103,13 +103,6 @@ const SideBar = () => {
             </AccordionDetails>
           </Accordion>
         </div>
-
-        {/* <div style={{ display: "flex", alignItems: "center" }}>
-          {(location.pathname === '/home/orders/dine-in' || location.pathname === '/home/orders/take-way' || location.pathname === '/home/orders/completed') && (
-            <div style={{ width: "6px", height: "39px", background: "#F55A2C" }}></div>
-          )}
-          <li className={`sideBar__normalli ${(location.pathname === '/home/orders/dine-in' || location.pathname === '/home/orders/take-way' || location.pathname === '/home/orders/completed') ? 'active' : ''}`} onClick={() => { navigate("/home/orders/dine-in"); handleSetActiveLink('/home/orders/dine-in') }}><img src={(location.pathname === '/home/orders/dine-in' || location.pathname === '/home/orders/take-way' || location.pathname === '/home/orders/completed') ? activeOrder : order} alt="oder" className='sideBar__icon' /><span>Orders</span></li>
-        </div> */}
       </div>
     </nav>
   )

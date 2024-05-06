@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 import { CreateMenuValidation } from '../../../formValidation/formValidation';
+import { createMenuAPI } from '../../../service/Collection';
 const CreateMenu = ({ open, setOpen, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -17,20 +18,35 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-        formik.setFieldValue('image', file ? file.name : '');
-    };
+        formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
+    };    
 
     const formik = useFormik({
         initialValues: {
             name: '',
             description: '',
-            image: ''
+            imageUrl: ''
         },
         validationSchema: CreateMenuValidation,
-        onSubmit: values => {
-            console.log("values", values);
-            formik.resetForm();
-            setSelectedImage(null);
+        onSubmit: async (values) => {
+            try {
+                // await createMenuAPI({
+                //     name: values.name,
+                //     description: values.description,
+                //     imageUrl: values.imageUrl,
+                //     // status: true ,
+                // });
+                console.log("Menu created successfully!", {
+                    name: values.name,
+                    description: values.description,
+                    imageUrl: values.imageUrl,
+                });
+                formik.resetForm();
+                setSelectedImage(null);
+                handleClose();
+            } catch (error) {
+                console.error("Error creating menu:", error);
+            }
         },
     });
 
@@ -57,7 +73,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                 </label>
                                 <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
                             </div>
-                            {formik.touched.image && formik.errors.image && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.image}</Text>}
+                            {formik.touched.imageUrl && formik.errors.imageUrl && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.imageUrl}</Text>}
 
                             <label style={{ width: "353px", height: "72px" }} className='createMenuLabel'>
                                 <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">

@@ -4,10 +4,10 @@ import TextError from '../../formValidation/error';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react'
-import { loginApi } from "../../api/login";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { LoginValidation } from '../../formValidation/formValidation';
+import { loginAPIResponse } from "../../service/Collection";
 
 const Login = () => {
     const [forgetPasswordOpen, setForgetPasswordOpen] = useState(false);
@@ -28,12 +28,10 @@ const Login = () => {
 
     const handlesubmit = async (values) => {
         try {
-            console.log(values)
-            const response = await loginApi({
-                email: values.email,
-                password: values.password
-            });
-            console.log(response.data);
+            const response = await loginAPIResponse(values);
+            console.log(response,"responseeeeeeeeee")
+            const { token } = response;
+            localStorage.setItem('token', token); 
             navigate('/home');
         } catch (error) {
             console.error(error);

@@ -15,7 +15,7 @@ const Layout = () => {
             <div className='layout__nabBar'>
                 <NavBar toggleSidebar={toggleSidebar} />
             </div>
-            <div className={`layout__sideBar ${sidebarVisible ? 'visible' : ''}`}>
+            <div  className={`layout__sideBar ${sidebarVisible ? 'visible' : ''}`}>
                 <SideBar />
             </div>
             <div className='layout__main'>

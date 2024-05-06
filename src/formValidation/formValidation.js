@@ -28,7 +28,7 @@ export const ProfileValidation = Yup.object({
     mailAddress: Yup.string().email().required("Mail Address is required"),
     address: Yup.string().required("Address is required"),
     timeZone: Yup.string().required("Time zone is required"),
-    phoneNumber: Yup.string().required("Phone number is required"),
+    phoneNumber: Yup.string(),
     restaurantBio: Yup.string().required("Restaurant bio is required"),
     currency: Yup.string().required("Currency is required"),
     vat: Yup.string().required("Vat is required"),
@@ -41,5 +41,5 @@ export const ProfileValidation = Yup.object({
 export const CreateMenuValidation = Yup.object({
     name: Yup.string().required("Name is required"),
     description: Yup.string().required("Description is required"),
-    image: Yup.string().required("Image is required"),
+    imageUrl: Yup.string().required("Image is required"),
 })

@@ -5,8 +5,11 @@ import ViewItem from '../sections/view'
 import info from "../../../images/info.png"
 import Grid from '@mui/material/Unstable_Grid2';
 import cardImg from "../../../images/image 1.png"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormControlLabel, Switch, styled } from '@mui/material'
+import { getAllMenuAPI } from "../../../service/Collection"
+import { updateMenuStatusAPI } from "../../../service/Collection"
+import Loader from "../../loader/loader"
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -64,7 +67,8 @@ const Menus = () => {
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
   const [editMenuOpen, setEditMenuOpen] = useState(false);
   const [viewSectionOpen, setViewSectionOpen] = useState(false);
-
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(false);
   const openCreateMenuDialog = () => {
     setCreateMenuOpen(true);
   };
@@ -89,54 +93,84 @@ const Menus = () => {
     setViewSectionOpen(false);
   };
 
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      await updateMenuStatusAPI(id, { status: status });
+      console.log({ status: status }, "Status updated successfully");
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  }
+
+  const getProfileDetails = async () => {
+    let res = await getAllMenuAPI();
+    setMenuItems(res.data)
+    console.log(res.data, "resssssssssss")
+  }
+
+
+  useEffect(() => {
+    getProfileDetails()
+  }, [])
+
   return (
     <div className='menus'>
-      <div className='menus__topWrapper'>
-        <p className='menus__title'>Menus</p>
-        <button className='menus__createButton' onClick={openCreateMenuDialog}>CREATE</button>
-      </div>
-      <Grid container className='menus__allCardsWrapper' spacing={4} >
-        {
-          Array.from({ length: 5 }).map((_, index) => (
-            <Grid item  xs={12} sm={6} md={4} lg={4} xl={2.4} key={index}>
-            <div className='menus__cardWrapper'>
-              <div className='menus__imgWrapper'  >
-                <img src={cardImg} alt="" className='menus__img' />
-              </div>
-              <div className='menus__cardContent'>
-                <div className='menus__cardHeading'>
-                  <p className='menus__cardTitle'>New Year Menu</p>
-                  <div>
-                    <FormControlLabel
-                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                      className='profile__switch'
-                    />
+      {loading && (
+        <Loader />
+      )}
+      {!loading && (
+        <div>
+          <div className='menus__topWrapper'>
+            <p className='menus__title'>Menus</p>
+            <button className='menus__createButton' onClick={openCreateMenuDialog}>CREATE</button>
+          </div>
+          <Grid container className='menus__allCardsWrapper' spacing={4} >
+            {menuItems?.map((menuItem) => (
+              <Grid key={menuItem._id} item xs={12} sm={6} md={4} lg={4} xl={2.4} >
+                <div className='menus__cardWrapper'>
+                  <div className='menus__imgWrapper'  >
+                    <img src={menuItem?.imageUrl} alt="" className='menus__img' />
+                  </div>
+                  <div className='menus__cardContent'>
+                    <div className='menus__cardHeading'>
+                      <p className='menus__cardTitle'>{menuItem?.name}</p>
+                      <div>
+                        <FormControlLabel
+                          control={
+                            <IOSSwitch
+                              sx={{ m: 1 }}
+                              defaultChecked={menuItem?.status}
+                              onClick={() => handleStatusUpdate(menuItem._id, !menuItem.status)}
+                            />
+                          }
+                          className='profile__switch'
+                        />
+
+
+                      </div>
+                    </div>
+                    <div className='menus__cardDescriptionWrapper'>
+                      <p className='menus__cardDescription'>
+                        {menuItem?.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className='menus__cardAction'>
+                    <button className='menus__deleteButton'>Delete</button>
+                    <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
+                  </div>
+                  <div className='menus__info'>
+                    <img src={info} alt="info" onClick={openViewSectionDialog} />
                   </div>
                 </div>
-                <div className='menus__cardDescriptionWrapper'>
-                  <p className='menus__cardDescription'>
-                    Lorem Ipsum is simply dummy text of  the
-                    printing and typesetting industry.
-                  </p>
-                </div>
-              </div>
-              <div className='menus__cardAction'>
-                <button className='menus__deleteButton'>Delete</button>
-                <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
-              </div>
-              <div className='menus__info'>
-                <img src={info} alt="info" onClick={openViewSectionDialog} />
-              </div>
-              </div>
-             </Grid>
-          ))
-        }
-      </Grid>
-
-      {createMenuOpen && <CreateMenu open={createMenuOpen} setOpen={setCreateMenuOpen} onClose={closeCreateMenuDialog} />}
-      {editMenuOpen && <EditMenu open={editMenuOpen} setOpen={setEditMenuOpen} onClose={closeEditMenuDialog} />}
-      {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
-
+              </Grid>
+            ))}
+          </Grid>
+          {createMenuOpen && <CreateMenu open={createMenuOpen} setOpen={setCreateMenuOpen} onClose={closeCreateMenuDialog} />}
+          {editMenuOpen && <EditMenu open={editMenuOpen} setOpen={setEditMenuOpen} onClose={closeEditMenuDialog} />}
+          {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
+        </div>
+      )}
     </div>
   )
 }
