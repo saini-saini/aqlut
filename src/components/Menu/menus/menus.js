@@ -103,11 +103,12 @@ const Menus = () => {
   }
 
   const getProfileDetails = async () => {
+    setLoading(true)
     let res = await getAllMenuAPI();
     setMenuItems(res.data)
+    setLoading(false)
     console.log(res.data, "resssssssssss")
   }
-
 
   useEffect(() => {
     getProfileDetails()
