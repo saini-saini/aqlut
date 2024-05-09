@@ -1,7 +1,7 @@
 import "./style.scss"
 import EditMenu from './editMenu'
 import CreateMenu from './createMenu'
-import ViewItem from '../sections/view'
+import ViewItem from "./viewDetails"
 import info from "../../../images/info.png"
 import Grid from '@mui/material/Unstable_Grid2';
 import cardImg from "../../../images/image 1.png"
@@ -10,6 +10,10 @@ import { FormControlLabel, Switch, styled } from '@mui/material'
 import { getAllMenuAPI } from "../../../service/Collection"
 import { updateMenuStatusAPI } from "../../../service/Collection"
 import Loader from "../../loader/loader"
+import { eventEmitter } from "../../../utils/eventEmitter"
+import { deleteMenuAPI } from "../../../service/Collection"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -69,6 +73,7 @@ const Menus = () => {
   const [viewSectionOpen, setViewSectionOpen] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
   const openCreateMenuDialog = () => {
     setCreateMenuOpen(true);
   };
@@ -77,16 +82,18 @@ const Menus = () => {
     setCreateMenuOpen(false);
   };
 
-  const openEditMenuDialog = () => {
+  const openEditMenuDialog = (menuItem) => {
     setEditMenuOpen(true);
+    setSelectedMenuItem(menuItem);
   };
 
   const closeEditMenuDialog = () => {
     setEditMenuOpen(false);
   };
 
-  const openViewSectionDialog = () => {
+  const openViewSectionDialog = (menuItem) => {
     setViewSectionOpen(true);
+    setSelectedMenuItem(menuItem);
   };
 
   const closeViewSectionDialog = () => {
@@ -95,10 +102,31 @@ const Menus = () => {
 
   const handleStatusUpdate = async (id, status) => {
     try {
-      await updateMenuStatusAPI(id, { status: status });
-      console.log({ status: status }, "Status updated successfully");
+      await updateMenuStatusAPI( {
+        id: id,
+        status: status
+       });
+       toast.success("Status updated successfully")
+      eventEmitter.dispatch('menuStatusUpdated');
     } catch (error) {
       console.error("Error updating status:", error);
+      toast.error("Something went wrong", {
+        theme: "colored",
+    })
+    }
+  }
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteMenuAPI(id);
+      console.log("Menu deleted successfully!");
+      toast.success("Menu deleted successfully")
+      eventEmitter.dispatch('menuDeleted');
+    } catch (error) {
+      console.error("Error deleting menu:", error);
+      toast.error("Something went wrong", {
+        theme: "colored",
+    })
     }
   }
 
@@ -107,12 +135,30 @@ const Menus = () => {
     let res = await getAllMenuAPI();
     setMenuItems(res.data)
     setLoading(false)
-    console.log(res.data, "resssssssssss")
   }
 
+
   useEffect(() => {
-    getProfileDetails()
-  }, [])
+    getProfileDetails();
+    const unsubscribe = eventEmitter.subscribe('menuCreated', () => {
+      getProfileDetails();
+    });
+    const unsubscribeMenuUpdated = eventEmitter.subscribe('menuUpdated', () => {
+      getProfileDetails();
+    });
+    const unsubscribeDelete = eventEmitter.subscribe('menuDeleted', () => {
+      getProfileDetails();
+    });
+    const unsubscribeStatus = eventEmitter.subscribe('menuStatusUpdated', () => {
+      getProfileDetails();
+    });
+    return () => {
+      unsubscribe();
+      unsubscribeMenuUpdated();
+      unsubscribeDelete();
+      unsubscribeStatus();
+    };
+  }, []);
 
   return (
     <div className='menus'>
@@ -127,7 +173,7 @@ const Menus = () => {
           </div>
           <Grid container className='menus__allCardsWrapper' spacing={4} >
             {menuItems?.map((menuItem) => (
-              <Grid key={menuItem._id} item xs={12} sm={6} md={4} lg={4} xl={2.4} >
+              <Grid key={menuItem._id} item xs={12} sm={6} md={3} lg={4} xl={2.4} >
                 <div className='menus__cardWrapper'>
                   <div className='menus__imgWrapper'  >
                     <img src={menuItem?.imageUrl} alt="" className='menus__img' />
@@ -157,19 +203,19 @@ const Menus = () => {
                     </div>
                   </div>
                   <div className='menus__cardAction'>
-                    <button className='menus__deleteButton'>Delete</button>
-                    <button className='menus__editButton' onClick={openEditMenuDialog}>Edit</button>
+                    <button className='menus__deleteButton' onClick={() => handleDelete(menuItem._id)}>Delete</button>
+                    <button className='menus__editButton' onClick={() => openEditMenuDialog(menuItem)}>Edit</button>
                   </div>
                   <div className='menus__info'>
-                    <img src={info} alt="info" onClick={openViewSectionDialog} />
+                    <img src={info} alt="info" onClick={() => openViewSectionDialog(menuItem)} />
                   </div>
                 </div>
               </Grid>
             ))}
           </Grid>
           {createMenuOpen && <CreateMenu open={createMenuOpen} setOpen={setCreateMenuOpen} onClose={closeCreateMenuDialog} />}
-          {editMenuOpen && <EditMenu open={editMenuOpen} setOpen={setEditMenuOpen} onClose={closeEditMenuDialog} />}
-          {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} />}
+          {editMenuOpen && <EditMenu open={editMenuOpen} setOpen={setEditMenuOpen} onClose={closeEditMenuDialog} selectedMenuItem={selectedMenuItem} />}
+          {viewSectionOpen && <ViewItem open={viewSectionOpen} setOpen={setViewSectionOpen} onClose={closeViewSectionDialog} selectedMenuItem={selectedMenuItem}/>}
         </div>
       )}
     </div>

@@ -1,31 +1,23 @@
 import "./section.scss"
 import Avatar from '@mui/material/Avatar';
 import close from "../../../images/close (1).png"
-import img from "../../../images/createMenuImg.png"
-// import { Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
-import { createSectionAPI, getAllMenuAPI } from "../../../service/Collection";
+import { getAllMenuAPI } from "../../../service/Collection";
 import { useFormik } from "formik";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Select } from '@radix-ui/themes';
 import { eventEmitter } from '../../../utils/eventEmitter';
+import { sectionUpdateAPI } from "../../../service/Collection";
 
-const CreateSection = ({ open, setOpen, onClose }) => {
+const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
-
     const handleClose = () => {
         setOpen(false);
         onClose(false);
     };
-
-    const handleSelectChange = (value) => {
-        console.log(`Selected menu ID: ${value}`);
-        formik.setFieldValue('menuId', value);
-    };
-
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -33,35 +25,45 @@ const CreateSection = ({ open, setOpen, onClose }) => {
         formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
     };
 
+    // console.log(selectedSecttion, "sssssssssssssss")
+    // console.log(menuItems, "menuItems")
+
+    const menuFilter = menuItems.filter((item) => item._id === selectedSecttion?.menuId)
+    let data = menuFilter.map((item) => item?.name)
+    console.log(data[0])
+
     const formik = useFormik({
         initialValues: {
-            section: '',
-            description: '',
-            imageUrl: '',
-            menuId: '',
+            section: selectedSecttion?.section || '',
+            description: selectedSecttion?.description || '',
+            imageUrl: selectedSecttion?.imageUrl || '',
+            menuId: data[0] || '',
+            sortOrderId: selectedSecttion?.sortOrderId || '',
         },
-        // validationSchema: CreateMenuValidation,
         onSubmit: async (values) => {
             try {
                 const selectedMenuItem = menuItems?.find(menu => menu?.name === values?.menuId);
                 if (selectedMenuItem) {
                     values.menuId = selectedMenuItem?._id;
                 }
-                await createSectionAPI({
+                await sectionUpdateAPI( {
+                    id: selectedSecttion?._id,
+                    section: values?.section,
+                    description: values?.description,
+                    imageUrl: values?.imageUrl,
+                    menuId: values?.menuId,
+                    sortOrderId: values?.sortOrderId,
+                });
+                eventEmitter.dispatch('sectionUpdated');
+                console.log("section updated successfully!", {
+                    id: selectedSecttion?._id,
                     section: values.section,
                     description: values.description,
                     imageUrl: values.imageUrl,
                     menuId: values.menuId,
-                    sortOrderId:values.sortOrderId,
+                    sortOrderId: values.sortOrderId,
                 });
-                console.log("section created successfully!", {
-                    section: values.section,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                    menuId: values.menuId,
-                    sortOrderId:values.sortOrderId,
-                });
-                toast.success("Section created successfully")
+                toast.success("Section updated successfully")
                 eventEmitter.dispatch('sectionCreated');
                 formik.resetForm();
                 setSelectedImage(null);
@@ -84,13 +86,11 @@ const CreateSection = ({ open, setOpen, onClose }) => {
         getMenuDetails()
     }, [])
 
-    console.log(menuItems, "menuItems")
-
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >
                 <Dialog.Content style={{ width: '450px', height: '704px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: "relative", boxShadow: " 0px 10px 30px 0px #00000040" }} className='createSectionContainer'>
-                    <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Create Section</Dialog.Title>
+                    <Dialog.Title style={{ textAlign: 'center', width: "223px", height: "29px", fontWeight: "600", fontFamily: "Montserrat", fontSize: "24px", lineHeight: "29.26px", marginBottom: " 18px" }}>Edit Section</Dialog.Title>
 
                     <form onSubmit={formik.handleSubmit}>
                         <div style={{ paddingBottom: "25px" }}>
@@ -101,12 +101,24 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                             <Avatar
                                                 src={URL.createObjectURL(selectedImage)}
                                                 alt="logo"
-                                                sx={{ width: 135, height: 114, objectFit: "contain", borderRadius: "20px", }}
+                                                sx={{
+                                                    width: 135,
+                                                    height: 114,
+                                                    objectFit: "contain",
+                                                    borderRadius: "20px",
+                                                }}
                                             />
                                         ) : (
-                                            <div style={{ width: 135, height: 114, objectFit: "contain", borderRadius: "20px", display: "flex", justifyContent: "center", alignItems: "center", boxShadow: "0px 2px 8px 0px #00000040", }}>
-                                                <img src={img} alt="" style={{ width: "20px", height: "20px" }} />
-                                            </div>
+                                            <Avatar
+                                                src={selectedSecttion?.imageUrl}
+                                                alt="logo"
+                                                sx={{
+                                                    width: 135,
+                                                    height: 114,
+                                                    objectFit: "contain",
+                                                    borderRadius: "20px",
+                                                }}
+                                            />
                                         )}
                                     </label>
                                     <input id="imageInput" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
@@ -154,13 +166,12 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                         {formik.values.menuId ? formik.values.menuId : 'Select Menu'}
                                     </Select.Trigger>
                                     <Select.Content color='orange'>
-                                        {menuItems.map(menu => (
+                                        {menuItems?.map(menu => (
                                             <Select.Item key={menu._id} value={menu.name}>{menu.name}</Select.Item>
                                         ))}
                                     </Select.Content>
                                 </Select.Root>
                             </label>
-
 
                             <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>
                                 <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat">
@@ -245,4 +256,4 @@ const CreateSection = ({ open, setOpen, onClose }) => {
     );
 };
 
-export default CreateSection;
+export default EditSection;

@@ -15,22 +15,35 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import profileLogo from "../../images/profileSectionImg1.png";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getProfileDetailsAPI } from '../../service/Collection';
 
 
 const SideBar = () => {
   const [activeLink, setActiveLink] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [userName, setUserName] = useState({
+    logo:""
+  });
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
   };
 
+  const getProfileDetails = async () => {
+    let res = await getProfileDetailsAPI();
+    const fetchedData = res?.data?.restaurants[0];
+    setUserName(fetchedData);
+  }
+
+  useEffect(() => {
+    getProfileDetails();
+  }, []);
+
   return (
     <nav className='sideBar' >
-      <Avatar alt="logo" src={profileLogo ? profileLogo : ""} sx={{ width: 90, height: 90, margin: "20px" }} />
+      <Avatar alt="logo" src={userName?.logo} sx={{ width: 90, height: 90, margin: "20px" }} />
       <div>
         <div style={{ display: "flex", alignItems: "center" }}>
           {location.pathname === '/home' && (

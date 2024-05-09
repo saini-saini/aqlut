@@ -1,7 +1,6 @@
-import "./section.scss"
+import "../sections/section.scss"
 import React from 'react'
 import Dialog from '@mui/material/Dialog';
-import cardImg from "../../../images/image 1.png"
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import DialogContent from '@mui/material/DialogContent';
@@ -16,11 +15,16 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 
-function ViewItem({ open, setOpen,selectedSecttion }) {
+function ViewItem({ open, setOpen, selectedMenuItem }) {
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    console.log(selectedMenuItem, "selectedMenuItem")
 
     return (
         <div className="viewWrapper">
@@ -32,7 +36,7 @@ function ViewItem({ open, setOpen,selectedSecttion }) {
                     open={open}
                 >
                     <div>
-                        <img src={selectedSecttion?.imageUrl} alt="" style={{ width: "100%", height: "211px", borderRadius: '16px 0 0 0' }} />
+                        <img src={selectedMenuItem?.imageUrl} alt="" style={{ width: "100%", height: "211px", borderRadius: '16px 0 0 0' }} />
                     </div>
 
                     <IconButton
@@ -54,10 +58,10 @@ function ViewItem({ open, setOpen,selectedSecttion }) {
                     </IconButton>
                     <DialogContent className='view__contentWrapper'>
                         <div className='view__content'>
-                            <h1 className='view__title'>{selectedSecttion?.section}</h1>
-                            {/* <p className='view__info'>Desserts 102456 clas</p> */}
+                            <h1 className='view__title'>{selectedMenuItem?.name}</h1>
+                            {/* <p className='view__info'>{selectedMenuItem?.description}</p> */}
                         </div>
-                        <p className='view__desc'>{selectedSecttion?.description}</p>
+                        <p className='view__desc'>{selectedMenuItem?.description}</p>
                     </DialogContent>
                 </BootstrapDialog>
             </React.Fragment>

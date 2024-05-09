@@ -195,6 +195,10 @@
 
     &__cardDescriptionWrapper {
         padding: 7px 36px 29px 16px;
+        overflow-y: scroll;
+          &::-webkit-scrollbar {
+        display: none;
+    }
     }
 
     &__cardDescription {
@@ -308,8 +312,11 @@
         .rt-TextFieldRoot {
             width: 270px !important;
         }
-        :where(.css-dev-only-do-not-override-1kuana8).ant-select{
+
+        :where(.css-dev-only-do-not-override-1kuana8).ant-select {
             width: 270px !important;
         }
     }
+
+
 }

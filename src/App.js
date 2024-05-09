@@ -15,14 +15,15 @@ import PageNotFound from "./components/pageNotFound/pageNotFound";
 import SectionItems from "./components/Menu/sectionItem/sectionItems";
 import QRMenuGroup from "./components/QR_Menus/QR_Menu_Groups/qr_menu_group";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App" >
+      <div  >
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/" element={<WelcomePage />} /> */}
+          <Route path="/" element={<Login />} />
 
           <Route path="/home" element={<Layout />}>
             <Route index element={<Profile />} />
@@ -40,6 +41,13 @@ function App() {
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+
+        <ToastContainer
+          autoClose={4000}
+          hideProgressBar
+          closeOnClick
+          theme='colored'
+        />
       </div>
     </BrowserRouter>
   );

@@ -8,11 +8,11 @@ export const loginApi = async (data) => {
   try {
     let result = await Api.post(LOGIN_URL, data);
     if (result.status === 200) {
-      // if (result.data.status === 200) {
+      if (result.data.status === 200) {
         return result.data;
-      // } else {
-      //   return result.data.message;
-      // }
+      } else {
+        return result.data.message;
+      }
     }
   } catch (error) {
     if (error) {

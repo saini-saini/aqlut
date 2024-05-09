@@ -7,6 +7,10 @@ import React, { useState } from 'react';
 import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
 import { CreateMenuValidation } from '../../../formValidation/formValidation';
 import { createMenuAPI } from '../../../service/Collection';
+import { eventEmitter } from '../../../utils/eventEmitter';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const CreateMenu = ({ open, setOpen, onClose }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -19,7 +23,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
         const file = event.target.files[0];
         setSelectedImage(file);
         formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
-    };    
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -30,22 +34,27 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
         validationSchema: CreateMenuValidation,
         onSubmit: async (values) => {
             try {
-                // await createMenuAPI({
-                //     name: values.name,
-                //     description: values.description,
-                //     imageUrl: values.imageUrl,
-                //     // status: true ,
-                // });
+                await createMenuAPI({
+                    name: values.name,
+                    description: values.description,
+                    imageUrl: values.imageUrl,
+                    // status: true ,
+                });
                 console.log("Menu created successfully!", {
                     name: values.name,
                     description: values.description,
                     imageUrl: values.imageUrl,
                 });
+                toast.success("Menu created successfully")
+                eventEmitter.dispatch('menuCreated');
                 formik.resetForm();
                 setSelectedImage(null);
                 handleClose();
             } catch (error) {
                 console.error("Error creating menu:", error);
+                toast.error("Something went wrong", {
+                    theme: "colored",
+                })
             }
         },
     });

@@ -27,6 +27,10 @@ import { ProfileValidation } from "../../formValidation/formValidation";
 import { getProfileDetailsAPI } from "../../service/Collection";
 import dayjs from "dayjs";
 import Loader from "../loader/loader";
+import { updateProfile } from "../../service/Collection";
+import { updateTime } from "../../service/Collection";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -86,15 +90,6 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState()
   const [countryCode, setCountryCode] = useState()
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
-  const [dayChecked, setDayChecked] = useState({
-    sunday: false,
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-  });
   const [profileData, setProfileData] = useState({
     address: "",
     disableOrders: false,
@@ -115,10 +110,18 @@ const Profile = () => {
   };
 
   const handleDayCheckboxChange = (day) => (event) => {
-    setDayChecked((prev) => ({
-      ...prev,
-      [day]: event.target.checked,
-    }));
+    setOpeningTimes((prevOpeningTimes) => {
+      const updatedOpeningTimes = prevOpeningTimes.map((time) => {
+        if (time.day === day) {
+          return {
+            ...time,
+            isClose: event.target.checked,
+          };
+        }
+        return time;
+      });
+      return updatedOpeningTimes;
+    });
   };
 
   const removeImage = () => {
@@ -136,7 +139,7 @@ const Profile = () => {
       reader.onload = (e) => {
         setProfileData((prevData) => ({
           ...prevData,
-          logo: e.target.result
+          logo: URL.createObjectURL(file)
         }));
       };
       reader.readAsDataURL(file);
@@ -151,28 +154,73 @@ const Profile = () => {
     setCountryCode(countryCode)
   }
 
-  const handleSubmit = (values) => {
-    console.log('profile data:', {
-      ...values,
-      phoneNumber: {
-        country: countryCode?.name || "",
-        countryCode: "+" + countryCode?.dialCode || "",
-        number: phoneNumber || "",
-      },
-      time: {
-        sunday: {
-          openTime: "",
-          closeTime: "",
-          close: dayChecked.sunday,
-        },
-        monday: {
-          openTime: "",
-          closeTime: "",
-          close: dayChecked.monday,
-        }
-      }
-    })
-  }
+  const formatTime = (timeString) => {
+    const date = new Date(timeString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
+  const handleOpenTimeChange = (newTime, timeIndex) => {
+    const formattedTime = formatTime(newTime);
+    const updatedOpeningTimes = [...openingTimes];
+    updatedOpeningTimes[timeIndex].openTime = formattedTime;
+    setOpeningTimes(updatedOpeningTimes);
+  };
+
+  const handleCloseTimeChange = (newTime, timeIndex) => {
+    const formattedTime = formatTime(newTime);
+    const updatedOpeningTimes = [...openingTimes];
+    const newCloseTime = formattedTime;
+    if (newCloseTime > updatedOpeningTimes[timeIndex].openTime) {
+      updatedOpeningTimes[timeIndex].closeTime = newCloseTime;
+      setOpeningTimes(updatedOpeningTimes);
+    } else {
+      console.error("Close time must be greater than open time");
+      toast.error("Close time must be greater than open time", {
+        theme: "colored",
+      })
+    }
+  };
+
+  const handleSubmit = async (values) => {
+    try {
+      await updateProfile({
+        ...values,
+        // id: values._id,
+        logo: profileData?.logo,
+        disableOrders: profileData?.disableOrders || false,
+      });
+
+      const formattedData = {
+        idsToUpdate: [],
+        newData: [],
+      };
+
+      openingTimes.forEach((time, index) => {
+        const dayId = time._id;
+        formattedData.idsToUpdate.push(dayId);
+        formattedData.newData.push({
+          openTime: time.openTime,
+          closeTime: time.closeTime,
+          isClose: time.isClose,
+        });
+      });
+
+      const formattedPayload = {
+        idsToUpdate: formattedData.idsToUpdate,
+        newData: formattedData.newData,
+      };
+
+      await updateTime(formattedPayload);
+      toast.success("Profile updated successfully")
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Something went wrong", {
+        theme: "colored",
+      })
+    }
+  };
 
   const getProfileDetails = async () => {
     setLoading(true)
@@ -187,17 +235,12 @@ const Profile = () => {
     getProfileDetails();
   }, []);
 
-  console.log(openingTimes, "openingTimes")
-
-
-
-
   return (
     <div className='profile'>
       {loading && (
-         <Loader/>
+        <Loader />
       )}
-      
+
       {!loading && (
         <div >
           <div className='profile__topWrapper'>
@@ -253,7 +296,7 @@ const Profile = () => {
 
               <div>
                 <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked={profileData?.disableOrders} />}
+                  control={<IOSSwitch sx={{ m: 1 }} checked={profileData?.disableOrders} onChange={(event) => setProfileData((prevData) => ({ ...prevData, disableOrders: event.target.checked }))} />}
                   label="Disable Orders"
                   labelPlacement="start"
                   className='profile__switch'
@@ -264,7 +307,7 @@ const Profile = () => {
             <div className='profile__bottom'>
               <Formik
                 initialValues={profileData}
-                onSubmit={values => console.log(values)}
+                onSubmit={handleSubmit}
               >
                 <Form className='profile__form'>
                   <div className='profile__formWrapper'>
@@ -332,96 +375,53 @@ const Profile = () => {
                           <ErrorMessage name="serviceCharge" component={TextError} className='profile__error' />
                         </div>
                       </div>
-
-                      {/* <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                      <label className='profile__label'><img src={calender} alt="" className='profile__inputIcon' /><span>Opening Times</span></label>
-                      <div style={{ display: "flex", flexDirection: "column" }} className='profile__dayContainer'>
-                        {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
-                          <div key={day} style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "end" }} className='profile__day'>
-                            <div className='profile__daylabelWrapper'>
-                              <label className='profile__daylabel'>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
-                            </div>
-  
-                            <div style={{ display: "flex", gap: "25px", alignItems: "center" }} className='profile__dayTime'>
-                              <div>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DemoContainer components={['TimePicker']}>
-                                    <div style={{ width: "108px" }}>
-                                      <MobileTimePicker label="Open Time" disabled={dayChecked[day]}
-                                      />
-                                    </div>
-                                  </DemoContainer>
-                                </LocalizationProvider>
-                              </div>
-  
-                              <div>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                  <DemoContainer components={['TimePicker']}>
-                                    <div style={{ width: "108px" }}>
-                                      <MobileTimePicker label="Close Time" disabled={dayChecked[day]}
-                                      />
-                                    </div>
-                                  </DemoContainer>
-                                </LocalizationProvider>
-                              </div>
-  
-                              <div>
-                                <FormControlLabel
-                                  control={<Checkbox color='warning' checked={dayChecked[day]} onChange={handleDayCheckboxChange(day)} />}
-                                  label="Close"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div> 
-                    </div> */}
-
                       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                        <label className='profile__label'><img src={calender} alt="" className='profile__inputIcon' /><span>Opening Times</span></label>
-                        <div style={{ display: "flex", flexDirection: "column" }} className='profile__dayContainer'>
-                          {openingTimes?.map((time, index) => (
-                            <div key={time?._id} style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "end" }} className='profile__day'>
-                              <div className='profile__daylabelWrapper'>
-                                <label className='profile__daylabel'>{time?.day.charAt(0).toUpperCase() + time?.day.slice(1)}</label>
-                              </div>
-
-                              <div style={{ display: "flex", gap: "25px", alignItems: "center" }} className='profile__dayTime'>
-                                <div>
-                                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <div style={{ width: "108px" }}>
-                                      <MobileTimePicker
-                                        label="Open Time"
-                                        onChange={(e, d) => console.log(e, d, "dddddddddddd")}
-                                        value={dayjs("Fri May 03 2024 05:00:00")}
-                                        disabled={time?.isClose}
-                                      />
-                                    </div>
-                                  </LocalizationProvider>
+                        {openingTimes?.map((time, index) => (
+                          <>
+                            <label className='profile__label'><img src={calender} alt="" className='profile__inputIcon' /><span>Opening Times</span></label>
+                            <div style={{ display: "flex", flexDirection: "column" }} className='profile__dayContainer'>
+                              <div key={time?._id} style={{ display: "flex", gap: "12px", alignItems: "center", justifyContent: "end" }} className='profile__day'>
+                                <div className='profile__daylabelWrapper'>
+                                  <label className='profile__daylabel'>{time?.day.charAt(0).toUpperCase() + time?.day.slice(1)}</label>
                                 </div>
 
-                                <div>
-                                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <div style={{ width: "108px" }}>
-                                      <MobileTimePicker
-                                        label="Close Time"
-                                        value={dayjs("Fri May 03 2024 05:00:00")}
-                                        disabled={time?.isClose}
-                                      />
-                                    </div>
-                                  </LocalizationProvider>
-                                </div>
-                                <div>
-                                  <FormControlLabel
-                                    control={<Checkbox color='warning' checked={time?.isClose} onChange={handleDayCheckboxChange(time?.day)} />}
-                                    label="Close"
-                                  />
+                                <div style={{ display: "flex", gap: "25px", alignItems: "center" }} className='profile__dayTime'>
+                                  <div>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <div style={{ width: "108px" }}>
+                                        <MobileTimePicker
+                                          label="Open Time"
+                                          onChange={(newTime) => handleOpenTimeChange(newTime, index)}
+                                          value={dayjs(`Fri May 03 2024 ${time?.openTime}:00`)}
+                                          disabled={time?.isClose}
+                                        />
+                                      </div>
+                                    </LocalizationProvider>
+                                  </div>
 
+                                  <div>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                      <div style={{ width: "108px" }}>
+                                        <MobileTimePicker
+                                          label="Close Time"
+                                          onChange={(newTime) => handleCloseTimeChange(newTime, index)}
+                                          value={dayjs(`Fri May 03 2024 ${time?.closeTime}:00`)}
+                                          disabled={time?.isClose}
+                                        />
+                                      </div>
+                                    </LocalizationProvider>
+                                  </div>
+                                  <div>
+                                    <FormControlLabel
+                                      control={<Checkbox color='warning' checked={time?.isClose} onChange={handleDayCheckboxChange(time?.day)} />}
+                                      label="Close"
+                                    />
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          ))}
-                        </div>
+                          </>
+                        ))}
                       </div>
                     </div>
 
@@ -443,10 +443,7 @@ const Profile = () => {
         </div>
       )}
     </div>
-
   )
 }
 
 export default Profile
-
-

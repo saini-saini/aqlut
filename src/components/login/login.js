@@ -8,11 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { LoginValidation } from '../../formValidation/formValidation';
 import { loginAPIResponse } from "../../service/Collection";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { loginUser } from "../../redux/slice/loginSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
     const [forgetPasswordOpen, setForgetPasswordOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
@@ -29,15 +34,19 @@ const Login = () => {
     const handlesubmit = async (values) => {
         try {
             const response = await loginAPIResponse(values);
-            console.log(response,"responseeeeeeeeee")
             const { token } = response;
-            localStorage.setItem('token', token); 
+            dispatch(loginUser({ token }));
+            localStorage.setItem('token', token);
+            toast.success("Login successfully")
             navigate('/home');
         } catch (error) {
             console.error(error);
+            toast.error("Something went wrong", {
+                theme: "colored",
+            })
         }
     };
-    
+
     return (
         <div className='loginForm'>
             <Formik

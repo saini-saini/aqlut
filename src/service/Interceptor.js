@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const base = "http://192.168.1.47:8080/"
+const base = "http://192.168.1.194:8080/"
 const version = "api/v1/"
 const EndPoint = base  + version
 
