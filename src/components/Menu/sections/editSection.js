@@ -14,6 +14,7 @@ import { sectionUpdateAPI } from "../../../service/Collection";
 const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
+
     const handleClose = () => {
         setOpen(false);
         onClose(false);
@@ -25,9 +26,6 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
         formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
     };
 
-    // console.log(selectedSecttion, "sssssssssssssss")
-    // console.log(menuItems, "menuItems")
-
     const menuFilter = menuItems.filter((item) => item._id === selectedSecttion?.menuId)
     let data = menuFilter.map((item) => item?.name)
     console.log(data[0])
@@ -37,7 +35,7 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
             section: selectedSecttion?.section || '',
             description: selectedSecttion?.description || '',
             imageUrl: selectedSecttion?.imageUrl || '',
-            menuId: data[0] || '',
+            menuId: data[0]|| '',
             sortOrderId: selectedSecttion?.sortOrderId || '',
         },
         onSubmit: async (values) => {

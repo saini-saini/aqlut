@@ -31,6 +31,7 @@ import { updateProfile } from "../../service/Collection";
 import { updateTime } from "../../service/Collection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { eventEmitter } from "../../utils/eventEmitter";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -213,6 +214,7 @@ const Profile = () => {
       };
 
       await updateTime(formattedPayload);
+      eventEmitter.dispatch('profileUpdated');
       toast.success("Profile updated successfully")
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -233,6 +235,12 @@ const Profile = () => {
 
   useEffect(() => {
     getProfileDetails();
+    const unsubscribe = eventEmitter.subscribe('profileUpdated', () => {
+      getProfileDetails();
+    });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (
@@ -334,7 +342,20 @@ const Profile = () => {
                       </div>
                       <div className='profile__inputWrapper'>
                         <label className='profile__label'><img src={phone} alt="" className='profile__inputIcon' /><span>Phone Number</span></label>
-                        <div style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7" }}>
+                        <div style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7"}}>
+                          <PhoneInput
+                            international
+                            countryCodeEditable={false}
+                            defaultCountry="IN"
+                            country={'in'}
+                            placeholder="Enter phone number"
+                            value={phoneNumber}
+                            onChange={(phoneNumber, countryCode) => { handleNumber(phoneNumber); handleCountryCode(countryCode) }}
+                            autoFocus={true}
+                            name="phoneNumber"
+                          />
+                        </div>
+                        <div style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7"}}>
                           <PhoneInput
                             international
                             countryCodeEditable={false}

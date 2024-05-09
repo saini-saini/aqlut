@@ -4,7 +4,6 @@ import CreateMenu from './createMenu'
 import ViewItem from "./viewDetails"
 import info from "../../../images/info.png"
 import Grid from '@mui/material/Unstable_Grid2';
-import cardImg from "../../../images/image 1.png"
 import React, { useEffect, useState } from 'react'
 import { FormControlLabel, Switch, styled } from '@mui/material'
 import { getAllMenuAPI } from "../../../service/Collection"

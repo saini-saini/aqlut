@@ -9,9 +9,12 @@ import { getProfileDetailsAPI } from '../../service/Collection';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { logOutUser } from '../../redux/slice/authSlice';
 
 const NavBar = ({ toggleSidebar }) => {
   const [openLogout, setOpenLogout] = useState(false)
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState({
     resturantName: ""
   });
@@ -24,8 +27,9 @@ const NavBar = ({ toggleSidebar }) => {
 
   const handleNavigate = async () => {
     try {
+      dispatch(logOutUser());
       localStorage.removeItem('token');
-      toast.success("Logout successfully")
+      // toast.success("Logout successfully")
       navigate("/");
     } catch (error) {
       console.log(error)

@@ -14,6 +14,7 @@ import EditSection from "./editSection";
 import { sectionDeleteAPI, sectionUpdateStatusAPI } from "../../../service/Collection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import noData from "../../../images/noData.jpg"
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -108,20 +109,20 @@ const Section = () => {
   const handleChange = (value) => {
     setSelectedMenuId(value);
   };
-  
+
   const handleStatusUpdate = async (id, status) => {
     try {
-      await sectionUpdateStatusAPI( {
+      await sectionUpdateStatusAPI({
         id: id,
         status: status
-       });
-       toast.success("Status updated successfully")
+      });
+      //  toast.success("Status updated successfully")
       eventEmitter.dispatch('sectionStatusUpdated');
     } catch (error) {
       console.error("Error updating status:", error);
       toast.error("Something went wrong", {
         theme: "colored",
-    })
+      })
     }
   }
 
@@ -129,13 +130,13 @@ const Section = () => {
     try {
       await sectionDeleteAPI(id);
       console.log("Section deleted successfully!");
-      toast.success("Section deleted successfully")
+      // toast.success("Section deleted successfully")
       eventEmitter.dispatch('sectionDeleted');
     } catch (error) {
       console.error("Error deleting menu:", error);
       toast.error("Something went wrong", {
         theme: "colored",
-    })
+      })
     }
   }
 
@@ -147,7 +148,7 @@ const Section = () => {
     setSection(sectionListing.data)
     setLoading(false)
   }
-
+  
   useEffect(() => {
     getMenuDetails();
     const unsubscribe = eventEmitter.subscribe('sectionCreated', () => {
@@ -193,12 +194,13 @@ const Section = () => {
               className="section__customSelect"
               options={[
                 { value: null, label: "All" },
-                ...menuItems?.map(item => ({
+                ...(menuItems ? menuItems.map(item => ({
                   value: item?._id,
                   label: item?.name,
-                }))
+                })) : [])
               ]}
             />
+
             <Grid container className='section__allCardsWrapper' spacing={4} >
               {filteredSections?.map((item) => (
                 <Grid item xs={12} sm={6} md={4} lg={4} xl={2.4} key={item?._id}>
@@ -215,7 +217,7 @@ const Section = () => {
                               <IOSSwitch
                                 sx={{ m: 1 }}
                                 defaultChecked={item?.status}
-                              onClick={() => handleStatusUpdate(item._id, !item.status)}
+                                onClick={() => handleStatusUpdate(item._id, !item.status)}
                               />
                             }
                             className='profile__switch'
@@ -239,7 +241,6 @@ const Section = () => {
                 </Grid>
               ))
               }
-
             </Grid>
             {createSectionOpen && <CreateSection open={createSectionOpen} setOpen={setCreateSectionOpen} onClose={closeCreateSectionDialog} />}
             {editSectionOpen && <EditSection open={editSectionOpen} setOpen={setEditSectionOpen} onClose={closeEditSectionDialog} selectedSecttion={selectedSecttion} />}

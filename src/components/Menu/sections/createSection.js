@@ -84,8 +84,6 @@ const CreateSection = ({ open, setOpen, onClose }) => {
         getMenuDetails()
     }, [])
 
-    console.log(menuItems, "menuItems")
-
     return (
         <div>
             <Dialog.Root open={open} onClose={onClose} >

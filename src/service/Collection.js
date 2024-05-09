@@ -1,7 +1,7 @@
 import { deleteApi, getApi, postApi, putApi } from "./ApiMethod";
 import { loginApi } from "./Authapi";
 
-
+//Profile
 const GETALL = "resturant/getAll";
 const UPDATE_PROFILE = "resturant/update";
 const PROFILE_UPDATE_TIME = "resturant/updateTime";
@@ -97,3 +97,6 @@ export const sectionUpdateStatusAPI = async (data) => {
 export const sectionUpdateAPI = async (data) => {
   return await putApi(SECTION_UPDATE, data);
 }
+
+
+///////////////////////////////////////  section Items ///////////////////////////////////////
