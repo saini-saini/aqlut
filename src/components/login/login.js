@@ -10,7 +10,7 @@ import { LoginValidation } from '../../formValidation/formValidation';
 import { loginAPIResponse } from "../../service/Collection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { loginUser } from "../../redux/slice/loginSlice";
+import { loginUser } from "../../redux/slice/authSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
