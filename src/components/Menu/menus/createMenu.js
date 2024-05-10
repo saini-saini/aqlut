@@ -22,14 +22,14 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-        formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
+        formik.setFieldValue('imageUrl', file);
     };
 
     const formik = useFormik({
         initialValues: {
             name: '',
             description: '',
-            imageUrl: ''
+            imageUrl: null
         },
         validationSchema: CreateMenuValidation,
         onSubmit: async (values) => {
@@ -37,12 +37,8 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                 const formData = new FormData();
                 formData.set('name', values?.name);
                 formData.set('description', values?.description);
-                formData.set('imageUrl', values?.imageUrl);
+                formData.append('imageUrl', values?.imageUrl); 
                 await createMenuAPI(formData);
-                for (var pair of formData.entries()) {
-                    console.log(pair[0] + ", " + pair[1])
-
-                }
                 // console.log("Menu created successfully!", formData);
                 eventEmitter.dispatch('menuCreated');
                 formik.resetForm();
