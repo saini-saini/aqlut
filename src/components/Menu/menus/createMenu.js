@@ -1,7 +1,7 @@
-import './style.scss'
+import './style.scss';
 import Avatar from '@mui/material/Avatar';
-import close from "../../../images/close (1).png"
-import img from "../../../images/createMenuImg.png"
+import close from "../../../images/close (1).png";
+import img from "../../../images/createMenuImg.png";
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, Dialog, Flex, Text, TextArea, TextField } from '@radix-ui/themes';
@@ -34,27 +34,25 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
         validationSchema: CreateMenuValidation,
         onSubmit: async (values) => {
             try {
-                await createMenuAPI({
-                    name: values.name,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                    // status: true ,
-                });
-                console.log("Menu created successfully!", {
-                    name: values.name,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                });
-                toast.success("Menu created successfully")
+                const formData = new FormData();
+                formData.set('name', values?.name);
+                formData.set('description', values?.description);
+                formData.set('imageUrl', values?.imageUrl);
+                await createMenuAPI(formData);
+                for (var pair of formData.entries()) {
+                    console.log(pair[0] + ", " + pair[1])
+
+                }
+                // console.log("Menu created successfully!", formData);
                 eventEmitter.dispatch('menuCreated');
                 formik.resetForm();
                 setSelectedImage(null);
                 handleClose();
             } catch (error) {
                 console.error("Error creating menu:", error);
-                toast.error("Something went wrong", {
-                    theme: "colored",
-                })
+                // toast.error("Something went wrong", {
+                //     theme: "colored",
+                // })
             }
         },
     });

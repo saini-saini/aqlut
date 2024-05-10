@@ -35,7 +35,7 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
             section: selectedSecttion?.section || '',
             description: selectedSecttion?.description || '',
             imageUrl: selectedSecttion?.imageUrl || '',
-            menuId: data[0]|| '',
+            menuId: selectedSecttion?.menuId|| '',
             sortOrderId: selectedSecttion?.sortOrderId || '',
         },
         onSubmit: async (values) => {

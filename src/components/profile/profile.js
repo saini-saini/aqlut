@@ -32,6 +32,7 @@ import { updateTime } from "../../service/Collection";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { eventEmitter } from "../../utils/eventEmitter";
+import 'react-phone-input-2/lib/style.css';
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -88,8 +89,8 @@ const IOSSwitch = styled((props) => (
 const Profile = () => {
   const [openingTimes, setOpeningTimes] = useState([])
   const [loading, setLoading] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [countryCode, setCountryCode] = useState()
+  const [phoneNumber, setPhoneNumber] = useState(["", ""]);
+  const [countryCode, setCountryCode] = useState("IN");
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   const [profileData, setProfileData] = useState({
     address: "",
@@ -147,13 +148,27 @@ const Profile = () => {
     }
   };
 
-  const handleNumber = (phoneNumber) => {
-    setPhoneNumber(phoneNumber)
-  }
+  const handleCountryCode = (selectedCountry, index) => {
+    const countryCode = selectedCountry.dialCode;
+    setCountryCode(countryCode);
+    setPhoneNumber((prevPhoneNumber) => {
+      const newPhoneNumber = [...prevPhoneNumber];
+      const phoneNumberParts = newPhoneNumber[index].split(' ');
+      phoneNumberParts.shift(); 
+      const phoneNumberWithoutCode = phoneNumberParts.join(' ');
+      newPhoneNumber[index] = `+${countryCode} ${phoneNumberWithoutCode}`;
+      return newPhoneNumber;
+    });
+  };
 
-  const handleCountryCode = (countryCode) => {
-    setCountryCode(countryCode)
-  }
+  const handleNumber = (phoneNumber, index) => {
+    setPhoneNumber((prevPhoneNumber) => {
+      const newPhoneNumber = [...prevPhoneNumber];
+      const countryCode = newPhoneNumber[index].split(' ')[0]; 
+      newPhoneNumber[index] = `+${countryCode} ${phoneNumber.replace(/\s+/g, '')}`;
+      return newPhoneNumber;
+    });
+  };
 
   const formatTime = (timeString) => {
     const date = new Date(timeString);
@@ -186,13 +201,26 @@ const Profile = () => {
 
   const handleSubmit = async (values) => {
     try {
+      const formattedPhoneNumbers = phoneNumber.map((number, index) => {
+        if (number.trim() !== '') {
+          return `+${countryCode} ${number}`;
+        } else {
+          return number;
+        }
+      });
+
       await updateProfile({
         ...values,
         // id: values._id,
         logo: profileData?.logo,
         disableOrders: profileData?.disableOrders || false,
       });
-
+      console.log({
+        ...values,
+        logo: profileData?.logo,
+        disableOrders: profileData?.disableOrders || false,
+        phoneNumber: formattedPhoneNumbers,
+      })
       const formattedData = {
         idsToUpdate: [],
         newData: [],
@@ -215,7 +243,7 @@ const Profile = () => {
 
       await updateTime(formattedPayload);
       eventEmitter.dispatch('profileUpdated');
-      toast.success("Profile updated successfully")
+      // toast.success("Profile updated successfully")
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("Something went wrong", {
@@ -230,6 +258,7 @@ const Profile = () => {
     const fetchedData = res?.data?.restaurants[0];
     setProfileData(fetchedData);
     setOpeningTimes(res?.data?.openingTimes)
+    setPhoneNumber(fetchedData?.phoneNumber || []);
     setLoading(false)
   }
 
@@ -342,32 +371,26 @@ const Profile = () => {
                       </div>
                       <div className='profile__inputWrapper'>
                         <label className='profile__label'><img src={phone} alt="" className='profile__inputIcon' /><span>Phone Number</span></label>
-                        <div style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7"}}>
-                          <PhoneInput
-                            international
-                            countryCodeEditable={false}
-                            defaultCountry="IN"
-                            country={'in'}
-                            placeholder="Enter phone number"
-                            value={phoneNumber}
-                            onChange={(phoneNumber, countryCode) => { handleNumber(phoneNumber); handleCountryCode(countryCode) }}
-                            autoFocus={true}
-                            name="phoneNumber"
-                          />
-                        </div>
-                        <div style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7"}}>
-                          <PhoneInput
-                            international
-                            countryCodeEditable={false}
-                            defaultCountry="IN"
-                            country={'in'}
-                            placeholder="Enter phone number"
-                            value={phoneNumber}
-                            onChange={(phoneNumber, countryCode) => { handleNumber(phoneNumber); handleCountryCode(countryCode) }}
-                            autoFocus={true}
-                            name="phoneNumber"
-                          />
-                        </div>
+                        {phoneNumber.map((number, index) => (
+                          <div key={index} style={{ borderRadius: "8px", backgroundColor: "white", display: "flex", border: " 1px solid #F0F1F7" }}>
+                            <PhoneInput
+                              international
+                              countryCodeEditable={false}
+                              defaultCountry="IN"
+                              country={'in'}
+                              placeholder="Enter phone number"
+                              value={number}
+                              onChange={(phoneNumber) => handleNumber(phoneNumber, index)}
+                              onBlur={(phoneNumber, selectedCountry) => handleCountryCode(selectedCountry, index)}
+                              autoFocus={true}
+                              name="phoneNumber"
+                            />
+
+
+
+                          </div>
+                        ))}
+
                         <ErrorMessage name="phoneNumber" component={TextError} className='profile__error' />
                       </div>
                       <div className='profile__inputWrapper'>

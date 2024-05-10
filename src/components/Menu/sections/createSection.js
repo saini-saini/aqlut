@@ -47,7 +47,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                 if (selectedMenuItem) {
                     values.menuId = selectedMenuItem?._id;
                 }
-                await createSectionAPI({
+             await createSectionAPI({
                     section: values.section,
                     description: values.description,
                     imageUrl: values.imageUrl,
@@ -61,7 +61,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                     menuId: values.menuId,
                     sortOrderId:values.sortOrderId,
                 });
-                toast.success("Section created successfully")
+                // toast.success("Section created successfully")
                 eventEmitter.dispatch('sectionCreated');
                 formik.resetForm();
                 setSelectedImage(null);

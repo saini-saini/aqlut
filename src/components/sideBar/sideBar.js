@@ -47,7 +47,7 @@ const SideBar = () => {
       <div>
         <div style={{ display: "flex", alignItems: "center" }}>
           {location.pathname === '/home' && (
-            <div style={{ width: "6px", height: "27px", background: "#F55A2C" }}></div>
+            <div style={{ width: "6px", height: "39px", background: "#F55A2C" }}></div>
           )}
           <li className={`sideBar__normalli ${location.pathname === '/home' ? 'active' : ''}`} onClick={() => { navigate("/home"); handleSetActiveLink('/home'); }}>
             <img src={location.pathname === '/home' ? activeUser : profile} alt="profile" className='sideBar__icon' /><span>Profile</span>
@@ -74,7 +74,7 @@ const SideBar = () => {
               >
                 <div className='sideBar__expandHeading'>
                   {(location.pathname === '/home/menus/menus' || location.pathname === '/home/menus/sections' || location.pathname === '/home/menus/section_items') && (
-                    <div style={{ width: "6px", height: "27px", background: "#F55A2C", marginLeft: '-17px' }}></div>
+                    <div style={{ width: "6px", height: "39px", background: "#F55A2C", marginLeft: '-17px' }}></div>
                   )}
                   <img src={location.pathname === '/home/menus/menus' || location.pathname === '/home/menus/sections' || location.pathname === '/home/menus/section_items' ? activeMenu : menu} alt="menu" className='sideBar__icon' /><span style={{ display: 'flex', justifyContent: 'space-between', color: (location.pathname === '/home/menus/menus' || location.pathname === '/home/menus/sections' || location.pathname === '/home/menus/section_items') ? '#F55A2C' : 'inherit' }}>Menus</span>
                 </div>
@@ -105,7 +105,7 @@ const SideBar = () => {
             >
               <div className='sideBar__expandHeading'>
                 {(location.pathname === '/home/qr-menus/qr-codes' || location.pathname === '/home/qr-menus/qr-menu-groups') && (
-                  <div style={{ width: "6px", height: "27px", background: "#F55A2C", marginLeft: '-17px' }}></div>
+                  <div style={{ width: "6px", height: "39px", background: "#F55A2C", marginLeft: '-17px' }}></div>
                 )}
                 <img src={location.pathname === '/home/qr-menus/qr-codes' || location.pathname === '/home/qr-menus/qr-menu-groups' ? activeQRMenu : QRCode} alt="menu" className='sideBar__icon' /><span style={{ display: 'flex', justifyContent: 'space-between', color: (location.pathname === '/home/qr-menus/qr-codes' || location.pathname === '/home/qr-menus/qr-menu-groups') ? '#F55A2C' : 'inherit' }}>QR Menus</span>
               </div>
