@@ -129,7 +129,7 @@ const Menus = () => {
     }
   }
 
-  const getProfileDetails = async () => {
+  const getMenuDetails = async () => {
     setLoading(true)
     let res = await getAllMenuAPI();
     setMenuItems(res.data)
@@ -138,18 +138,18 @@ const Menus = () => {
 
 
   useEffect(() => {
-    getProfileDetails();
+    getMenuDetails();
     const unsubscribe = eventEmitter.subscribe('menuCreated', () => {
-      getProfileDetails();
+      getMenuDetails();
     });
     const unsubscribeMenuUpdated = eventEmitter.subscribe('menuUpdated', () => {
-      getProfileDetails();
+      getMenuDetails();
     });
     const unsubscribeDelete = eventEmitter.subscribe('menuDeleted', () => {
-      getProfileDetails();
+      getMenuDetails();
     });
     const unsubscribeStatus = eventEmitter.subscribe('menuStatusUpdated', () => {
-      getProfileDetails();
+      getMenuDetails();
     });
     return () => {
       unsubscribe();
@@ -159,6 +159,7 @@ const Menus = () => {
     };
   }, []);
 
+  console.log(menuItems,"menuItems")
   return (
     <div className='menus'>
       {loading && (
