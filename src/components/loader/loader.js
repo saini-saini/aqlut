@@ -23,12 +23,12 @@ import './loader.css'
 const Loader = () => {
     return (
         <div className="loading-spinner" style={{ height: "calc(100vh - 82px)", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div class="loader">
-            <div class="wrapper">
-                <div class="text">LOADING</div>
-                <div class="box"></div>
-            </div>
-        </div>
+            
+  <div class="loader">
+    <span class="loader-text">loading</span>
+      <span class="load"></span>
+  </div>
+
 
         </div>
 

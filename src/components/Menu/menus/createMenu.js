@@ -40,6 +40,7 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                 formData.append('imageUrl', values?.imageUrl); 
                 await createMenuAPI(formData);
                 // console.log("Menu created successfully!", formData);
+                // toast.success("Menu created successfully")
                 eventEmitter.dispatch('menuCreated');
                 formik.resetForm();
                 setSelectedImage(null);
@@ -130,7 +131,6 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                         </Dialog.Close>
 
                         <Flex justify="center">
-
                             <Dialog.Close>
                                 <Button
                                     type="submit"
@@ -149,7 +149,6 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
                                         fontFamily: "Montserrat",
                                         boxShadow: "0px 2px 16px 0px #3D6BC040"
                                     }}
-
                                 >SUBMIT</Button>
                             </Dialog.Close>
                         </Flex>
@@ -159,5 +158,4 @@ const CreateMenu = ({ open, setOpen, onClose }) => {
         </div>
     );
 };
-
 export default CreateMenu;

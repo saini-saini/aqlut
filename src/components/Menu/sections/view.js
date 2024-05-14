@@ -54,7 +54,7 @@ function ViewItem({ open, setOpen,selectedSecttion }) {
                     </IconButton>
                     <DialogContent className='view__contentWrapper'>
                         <div className='view__content'>
-                            <h1 className='view__title'>{selectedSecttion?.section}</h1>
+                            <h1 className='view__title'>{selectedSecttion?.name}</h1>
                             {/* <p className='view__info'>Desserts 102456 clas</p> */}
                         </div>
                         <p className='view__desc'>{selectedSecttion?.description}</p>

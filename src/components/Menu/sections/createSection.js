@@ -30,14 +30,14 @@ const CreateSection = ({ open, setOpen, onClose }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-        formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
+        formik.setFieldValue('imageUrl', file);
     };
 
     const formik = useFormik({
         initialValues: {
-            section: '',
+            name: '',
             description: '',
-            imageUrl: '',
+            imageUrl: null,
             menuId: '',
         },
         // validationSchema: CreateMenuValidation,
@@ -47,30 +47,30 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                 if (selectedMenuItem) {
                     values.menuId = selectedMenuItem?._id;
                 }
-             await createSectionAPI({
-                    section: values.section,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                    menuId: values.menuId,
-                    sortOrderId:values.sortOrderId,
-                });
-                console.log("section created successfully!", {
-                    section: values.section,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                    menuId: values.menuId,
-                    sortOrderId:values.sortOrderId,
-                });
+                const formData = new FormData();
+                formData.set('name', values?.name);
+                formData.set('description', values?.description);
+                formData.append('imageUrl', values?.imageUrl);
+                formData.set('menuId', values?.menuId);
+                formData.set('sortOrderId', values?.sortOrderId);
+                await createSectionAPI(formData);
+                // console.log("section created successfully!", {
+                //     section: values.name,
+                //     description: values.description,
+                //     imageUrl: values.imageUrl,
+                //     menuId: values.menuId,
+                //     sortOrderId:values.sortOrderId,
+                // });
                 // toast.success("Section created successfully")
                 eventEmitter.dispatch('sectionCreated');
                 formik.resetForm();
                 setSelectedImage(null);
                 handleClose();
             } catch (error) {
-                console.error("Error creating menu:", error);
-                toast.error("Something went wrong", {
-                    theme: "colored",
-                })
+                console.error("Error creating section:", error);
+                // toast.error("Something went wrong", {
+                //     theme: "colored",
+                // })
             }
         },
     });
@@ -128,13 +128,13 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                         padding: "13px 20px"
                                     }}
                                     placeholder="enter section"
-                                    id="section"
-                                    name="section"
-                                    value={formik.values.section}
+                                    id="name"
+                                    name="name"
+                                    value={formik.values.name}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
-                                {formik.touched.section && formik.errors.section && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.section}</Text>}
+                                {formik.touched.name && formik.errors.section && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.name}</Text>}
                             </label>
 
                             <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>
@@ -152,7 +152,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                         {formik.values.menuId ? formik.values.menuId : 'Select Menu'}
                                     </Select.Trigger>
                                     <Select.Content color='orange'>
-                                        {menuItems.map(menu => (
+                                        {menuItems?.map(menu => (
                                             <Select.Item key={menu._id} value={menu.name}>{menu.name}</Select.Item>
                                         ))}
                                     </Select.Content>
@@ -192,7 +192,7 @@ const CreateSection = ({ open, setOpen, onClose }) => {
                                         width: "352px",
                                         height: "102px",
                                         borderRadius: "8px",
-                                        outlineColor: "#F55A2C",
+                                        outline: "none",
                                         border: "1px solid #F0F1F7",
                                         padding: "13px 20px"
                                     }}

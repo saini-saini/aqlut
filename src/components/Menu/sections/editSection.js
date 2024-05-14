@@ -32,9 +32,9 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
 
     const formik = useFormik({
         initialValues: {
-            section: selectedSecttion?.section || '',
+            name: selectedSecttion?.name || '',
             description: selectedSecttion?.description || '',
-            imageUrl: selectedSecttion?.imageUrl || '',
+            imageUrl: selectedSecttion?.imageUrl || null,
             menuId: selectedSecttion?.menuId|| '',
             sortOrderId: selectedSecttion?.sortOrderId || '',
         },
@@ -44,33 +44,39 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
                 if (selectedMenuItem) {
                     values.menuId = selectedMenuItem?._id;
                 }
-                await sectionUpdateAPI( {
-                    id: selectedSecttion?._id,
-                    section: values?.section,
-                    description: values?.description,
-                    imageUrl: values?.imageUrl,
-                    menuId: values?.menuId,
-                    sortOrderId: values?.sortOrderId,
-                });
+
+                const formData = new FormData();
+                formData.set('id', selectedSecttion?._id);
+                formData.set('name', values?.name);
+                formData.set('description', values?.description);
+                if (selectedImage) {
+                    formData.append('imageUrl', selectedImage);
+                } else if (values?.imageUrl) {
+                    formData.append('imageUrl', values.imageUrl);
+                }
+                formData.set('menuId', values?.menuId);
+                formData.set('sortOrderId', values?.sortOrderId);
+
+                await sectionUpdateAPI(formData);
                 eventEmitter.dispatch('sectionUpdated');
-                console.log("section updated successfully!", {
-                    id: selectedSecttion?._id,
-                    section: values.section,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                    menuId: values.menuId,
-                    sortOrderId: values.sortOrderId,
-                });
-                toast.success("Section updated successfully")
+                // console.log("section updated successfully!", {
+                //     id: selectedSecttion?._id,
+                //     name: values.name,
+                //     description: values.description,
+                //     imageUrl: values.imageUrl,
+                //     menuId: values.menuId,
+                //     sortOrderId: values.sortOrderId,
+                // });
+                // toast.success("Section updated successfully")
                 eventEmitter.dispatch('sectionCreated');
                 formik.resetForm();
                 setSelectedImage(null);
                 handleClose();
             } catch (error) {
                 console.error("Error creating menu:", error);
-                toast.error("Something went wrong", {
-                    theme: "colored",
-                })
+                // toast.error("Something went wrong", {
+                //     theme: "colored",
+                // })
             }
         },
     });
@@ -140,13 +146,13 @@ const EditSection = ({ open, setOpen, onClose, selectedSecttion }) => {
                                         padding: "13px 20px"
                                     }}
                                     placeholder="enter section"
-                                    id="section"
-                                    name="section"
-                                    value={formik.values.section}
+                                    id="name"
+                                    name="name"
+                                    value={formik.values.name}
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                 />
-                                {formik.touched.section && formik.errors.section && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.section}</Text>}
+                                {formik.touched.section && formik.errors.name && <Text as="div" size="2" mb="1" fontWeight="400" fontSize="12px" fontFamily="Montserrat" color="red">{formik.errors.name}</Text>}
                             </label>
 
                             <label style={{ width: "353px", height: "66px" }} className='createSectionLabel'>

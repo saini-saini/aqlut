@@ -33,9 +33,9 @@ const NavBar = ({ toggleSidebar }) => {
       navigate("/");
     } catch (error) {
       console.log(error)
-      toast.error("Something went wrong", {
-        theme: "colored",
-      })
+      // toast.error("Something went wrong", {
+      //   theme: "colored",
+      // })
     }
   }
 

@@ -21,7 +21,7 @@
     }
 
     &__normalli {
-        display: flex;
+        display: flex; 
         align-items: center;
         gap: 10px;
         padding: 20px;
@@ -59,7 +59,6 @@
         span {
             width: 100%;
         }
-
     }
 
     &__expandHeading {

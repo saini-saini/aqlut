@@ -41,9 +41,9 @@ const Login = () => {
             navigate('/home');
         } catch (error) {
             console.error(error);
-            toast.error("Something went wrong", {
-                theme: "colored",
-            })
+            // toast.error("Something went wrong", {
+            //     theme: "colored",
+            // })
         }
     };
 

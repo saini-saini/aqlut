@@ -101,33 +101,41 @@ const Menus = () => {
 
   const handleStatusUpdate = async (id, status) => {
     try {
+      setLoading(true);
       await updateMenuStatusAPI( {
         id: id,
         status: status
        });
-       toast.success("Status updated successfully")
+      //  toast.success("Status updated successfully")
       eventEmitter.dispatch('menuStatusUpdated');
     } catch (error) {
       console.error("Error updating status:", error);
-      toast.error("Something went wrong", {
-        theme: "colored",
-    })
+    //   toast.error("Something went wrong", {
+    //     theme: "colored",
+    // })
+    }
+    finally {
+      setLoading(false);
     }
   }
 
   const handleDelete = async (id) => {
     try {
+      setLoading(true);
       await deleteMenuAPI(id);
       console.log("Menu deleted successfully!");
-      toast.success("Menu deleted successfully")
+      // toast.success("Menu deleted successfully")
       eventEmitter.dispatch('menuDeleted');
     } catch (error) {
       console.error("Error deleting menu:", error);
-      toast.error("Something went wrong", {
-        theme: "colored",
-    })
+      // toast.error("Something went wrong", {
+      //   theme: "colored",
+      // });
+    } finally {
+      setLoading(false);
     }
   }
+  
 
   const getMenuDetails = async () => {
     setLoading(true)

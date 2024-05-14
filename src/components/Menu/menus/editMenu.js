@@ -21,39 +21,39 @@ const EditMenu = ({ open, setOpen, onClose, selectedMenuItem }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-        formik.setFieldValue('imageUrl', file ? URL.createObjectURL(file) : '');
+        formik.setFieldValue('imageUrl', file);
     };
 
     const formik = useFormik({
         initialValues: {
             name: selectedMenuItem.name || '',
             description: selectedMenuItem.description || '',
-            imageUrl: selectedMenuItem.imageUrl || '',
+            imageUrl: selectedMenuItem.imageUrl || null,
         },
         validationSchema: CreateMenuValidation,
         onSubmit: async (values) => {
             try {
-                await updateMenuAPI( {
-                    id: selectedMenuItem?._id,
-                    name: values?.name,
-                    description: values?.description,
-                    imageUrl: values?.imageUrl,
-                });
+                const formData = new FormData();
+                formData.set('id', selectedMenuItem._id);
+                formData.set('name', values?.name);
+                formData.set('description', values?.description);
+                if (selectedImage) {
+                    formData.append('imageUrl', selectedImage);
+                } else if (values?.imageUrl) {
+                    formData.append('imageUrl', values.imageUrl);
+                }
+                await updateMenuAPI( formData);
+                console.log(formData);
                 eventEmitter.dispatch('menuUpdated');
-                console.log("Menu updated successfully!", {
-                    name: values.name,
-                    description: values.description,
-                    imageUrl: values.imageUrl,
-                });
-                toast.success("Menu updated successfully")
+                // toast.success("Menu updated successfully")
                 formik.resetForm();
                 setSelectedImage(null);
                 handleClose();
             } catch (error) {
                 console.error("Error creating menu:", error);
-                toast.error("Something went wrong", {
-                    theme: "colored",
-                })
+                // toast.error("Something went wrong", {
+                //     theme: "colored",
+                // })
             }
         },
     });

@@ -120,9 +120,9 @@ const Section = () => {
       eventEmitter.dispatch('sectionStatusUpdated');
     } catch (error) {
       console.error("Error updating status:", error);
-      toast.error("Something went wrong", {
-        theme: "colored",
-      })
+      // toast.error("Something went wrong", {
+      //   theme: "colored",
+      // })
     }
   }
 
@@ -134,9 +134,9 @@ const Section = () => {
       eventEmitter.dispatch('sectionDeleted');
     } catch (error) {
       console.error("Error deleting menu:", error);
-      toast.error("Something went wrong", {
-        theme: "colored",
-      })
+      // toast.error("Something went wrong", {
+      //   theme: "colored",
+      // })
     }
   }
 
@@ -203,14 +203,14 @@ const Section = () => {
 
             <Grid container className='section__allCardsWrapper' spacing={4} >
               {filteredSections?.map((item) => (
-                <Grid item xs={12} sm={6} md={4} lg={4} xl={2.4} key={item?._id}>
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={item?._id}>
                   <div className='section__cardWrapper'>
                     <div className='section__imgWrapper'>
                       <img src={item?.imageUrl} alt="" className='section__img' />
                     </div>
                     <div className='section__cardContent'>
                       <div className='section__cardHeading'>
-                        <p className='section__cardTitle'>{item?.section}</p>
+                        <p className='section__cardTitle'>{item?.name}</p>
                         <div>
                           <FormControlLabel
                             control={

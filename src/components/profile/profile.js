@@ -154,7 +154,7 @@ const Profile = () => {
     setPhoneNumber((prevPhoneNumber) => {
       const newPhoneNumber = [...prevPhoneNumber];
       const phoneNumberParts = newPhoneNumber[index].split(' ');
-      phoneNumberParts.shift(); 
+      phoneNumberParts.shift();
       const phoneNumberWithoutCode = phoneNumberParts.join(' ');
       newPhoneNumber[index] = `+${countryCode} ${phoneNumberWithoutCode}`;
       return newPhoneNumber;
@@ -164,7 +164,7 @@ const Profile = () => {
   const handleNumber = (phoneNumber, index) => {
     setPhoneNumber((prevPhoneNumber) => {
       const newPhoneNumber = [...prevPhoneNumber];
-      const countryCode = newPhoneNumber[index].split(' ')[0]; 
+      const countryCode = newPhoneNumber[index].split(' ')[0];
       newPhoneNumber[index] = `+${countryCode} ${phoneNumber.replace(/\s+/g, '')}`;
       return newPhoneNumber;
     });
@@ -192,10 +192,12 @@ const Profile = () => {
       updatedOpeningTimes[timeIndex].closeTime = newCloseTime;
       setOpeningTimes(updatedOpeningTimes);
     } else {
-      console.error("Close time must be greater than open time");
-      toast.error("Close time must be greater than open time", {
+      const dayOfWeek = updatedOpeningTimes[timeIndex].day;
+      const errorMessage = `Close time must be greater than open time for ${dayOfWeek}`;
+      console.error(errorMessage);
+      toast.error(errorMessage, {
         theme: "colored",
-      })
+      });
     }
   };
 
@@ -246,9 +248,9 @@ const Profile = () => {
       // toast.success("Profile updated successfully")
     } catch (error) {
       console.error("Error updating profile:", error);
-      toast.error("Something went wrong", {
-        theme: "colored",
-      })
+      // toast.error("Something went wrong", {
+      //   theme: "colored",
+      // })
     }
   };
 
